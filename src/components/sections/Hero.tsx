@@ -47,13 +47,13 @@ export default function Hero() {
           BACKEND DEVELOPER
         </p>
         <h1 className="leading-none mb-2">
-          <span ref={line1Ref} className="block text-[clamp(1.5rem,5vw,4rem)] font-black text-cosmos-accent tracking-[0.15em] uppercase">
+          <span ref={line1Ref} className="block text-[clamp(1rem,4vw,3.5rem)] font-black text-cosmos-accent tracking-[0.2em] uppercase mb-1">
             Muhammad
           </span>
-          <span ref={line2Ref} className="block text-[clamp(4rem,12vw,10rem)] font-black text-cosmos-text leading-[0.9]">
+          <span ref={line2Ref} className="block text-[clamp(3rem,12vw,10rem)] font-black text-cosmos-text leading-[0.9]">
             GILANG
           </span>
-          <span ref={line3Ref} className="block text-[clamp(4rem,12vw,10rem)] font-black text-cosmos-primary leading-[0.9]">
+          <span ref={line3Ref} className="block text-[clamp(2rem,8.5vw,10rem)] font-black text-cosmos-primary leading-[0.9]">
             MURDIYANTO
           </span>
         </h1>
