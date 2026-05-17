@@ -39,6 +39,7 @@ export const projects: Project[] = [
     title: 'Intekmas — Company Profile',
     description: 'Company profile website for Intekmas, built to establish their digital presence and showcase their business identity.',
     tags: ['Web', 'Company Profile'],
+    liveUrl: 'https://intekmas.com',
   },
   {
     type: 'side',
