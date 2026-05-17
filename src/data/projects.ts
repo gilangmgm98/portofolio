@@ -20,11 +20,24 @@ export const projects: Project[] = [
     description: 'High-performance backend for AI-driven data products. Achieved ~20% processing time improvement via ORM optimization and profiling.',
     tags: ['TypeScript', 'NestJS', 'Sequelize', 'MySQL'],
   },
-  // Side projects — update with real data later
+  // Side projects
+  {
+    type: 'side',
+    title: 'Kasir Digital — SaaS POS for UMKM',
+    description: 'Multi-tenant SaaS point-of-sale for Indonesian small businesses. Supports multi-outlet, inventory, QRIS/Midtrans payments, staff RBAC, PDF reports, and a hidden super-admin panel. Three subscription tiers with 14-day trial.',
+    tags: ['NestJS', 'Next.js', 'Prisma', 'PostgreSQL', 'Redis', 'Midtrans'],
+  },
+  {
+    type: 'side',
+    title: 'Kedai SimpTeng — Restaurant Website',
+    description: 'Branding and showcase website for a Padang restaurant chain with 3 branches in East Jakarta. Features menu browsing with category filters, GoFood/ShopeeFood/GrabFood order integration, and embedded Google Maps per branch.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    liveUrl: 'https://kedaisimpteng.com',
+  },
   {
     type: 'side',
     title: 'Portfolio Website',
-    description: 'This portfolio — built with Next.js, GSAP, Three.js, and Tailwind CSS. Dark Cosmos theme with immersive animations.',
+    description: 'This portfolio — built with Next.js, GSAP, Three.js, and Tailwind CSS. Dark Cosmos theme with full-page snap scroll and immersive particle animations.',
     tags: ['Next.js', 'TypeScript', 'GSAP', 'Three.js', 'Tailwind'],
     githubUrl: 'https://github.com/gilangmgm98/portofolio',
     liveUrl: 'https://gilangmgm.vercel.app',
