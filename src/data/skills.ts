@@ -14,7 +14,7 @@ export const skills: Skill[] = [
   { name: 'Redis', icon: 'redis', category: 'database' },
   { name: 'Firebase', icon: 'firebase', category: 'database' },
   { name: 'Sequelize', icon: 'sequelize', category: 'database' },
-  { name: 'AWS', icon: 'amazonaws', category: 'infra' },
+
   { name: 'Docker', icon: 'docker', category: 'infra' },
   { name: 'Nginx', icon: 'nginx', category: 'infra' },
   { name: 'Git', icon: 'git', category: 'infra' },
