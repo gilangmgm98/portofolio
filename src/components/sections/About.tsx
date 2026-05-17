@@ -34,8 +34,13 @@ export default function About() {
         <div ref={leftRef} className="flex justify-center">
           <div className="relative w-64 h-64 md:w-80 md:h-80">
             <div className="absolute inset-0 rounded-full bg-gradient-cosmos opacity-20 blur-2xl" />
-            <div className="relative w-full h-full rounded-full border-2 border-cosmos-primary glow-primary overflow-hidden bg-cosmos-surface flex items-center justify-center">
-              <span className="text-8xl font-black text-cosmos-primary">G</span>
+            <div className="relative w-full h-full rounded-full border-2 border-cosmos-primary glow-primary overflow-hidden bg-cosmos-surface">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://github.com/gilangmgm98.png"
+                alt="Muhammad Gilang Murdiyanto"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
