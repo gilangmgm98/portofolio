@@ -9,7 +9,7 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^three$': '<rootDir>/__mocks__/three.ts',
+    '^three(\\/.*)?$': '<rootDir>/__mocks__/three.ts',
     '^gsap$': '<rootDir>/__mocks__/gsap.ts',
     '^gsap/ScrollTrigger$': '<rootDir>/__mocks__/gsap.ts',
     '^gsap/SplitText$': '<rootDir>/__mocks__/gsap.ts',
