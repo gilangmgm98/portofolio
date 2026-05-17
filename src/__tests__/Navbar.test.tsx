@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react'
 import Navbar from '@/components/ui/Navbar'
 
 describe('Navbar', () => {
-  it('renders GM logo', () => {
+  it('renders MGM logo', () => {
     render(<Navbar activeSection={0} />)
-    expect(screen.getByText('GM')).toBeInTheDocument()
+    expect(screen.getByText('MGM')).toBeInTheDocument()
   })
 
   it('renders all nav links', () => {

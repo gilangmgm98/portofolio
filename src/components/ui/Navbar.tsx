@@ -30,7 +30,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
           onClick={() => scrollToSection(0)}
           className="text-cosmos-primary font-black text-xl tracking-wider"
         >
-          GM
+          MGM
         </button>
         <div className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
