@@ -5,7 +5,7 @@ import { gsap } from '@/lib/gsap'
 import type { Achievement } from '@/types'
 
 interface AchievementStatProps extends Achievement {
-  triggerRef: React.RefObject<HTMLElement>
+  triggerRef: React.RefObject<HTMLElement | null>
 }
 
 export default function AchievementStat({ value, suffix, label, description, triggerRef }: AchievementStatProps) {
