@@ -6,7 +6,7 @@ const THREE = {
     dispose: jest.fn(),
     domElement: document.createElement('canvas'),
   })),
-  Scene: jest.fn().mockImplementation(() => ({ add: jest.fn() })),
+  Scene: jest.fn().mockImplementation(() => ({ add: jest.fn(), remove: jest.fn() })),
   PerspectiveCamera: jest.fn().mockImplementation(() => ({
     position: { z: 0 },
     aspect: 1,

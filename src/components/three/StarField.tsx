@@ -71,6 +71,7 @@ export default function StarField({ particleCount = 2000 }: StarFieldProps) {
       cancelAnimationFrame(animId)
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('resize', handleResize)
+      scene.remove(stars)
       geometry.dispose()
       material.dispose()
       renderer.dispose()
