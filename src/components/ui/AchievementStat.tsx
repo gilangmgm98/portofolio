@@ -12,16 +12,19 @@ export default function AchievementStat({ value, suffix, label, description, tri
   const numRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    const obj = { val: 0 }
-    gsap.to(obj, {
-      val: value,
-      duration: 2,
-      ease: 'power2.out',
-      onUpdate: () => {
-        if (numRef.current) numRef.current.textContent = Math.round(obj.val).toString()
-      },
-      scrollTrigger: { trigger: triggerRef.current, start: 'top 80%' },
+    const ctx = gsap.context(() => {
+      const obj = { val: 0 }
+      gsap.to(obj, {
+        val: value,
+        duration: 2,
+        ease: 'power2.out',
+        onUpdate: () => {
+          if (numRef.current) numRef.current.textContent = Math.round(obj.val).toString()
+        },
+        scrollTrigger: { trigger: triggerRef.current, start: 'top 80%' },
+      })
     })
+    return () => ctx.revert()
   }, [value, triggerRef])
 
   return (
