@@ -37,7 +37,7 @@ export default function About() {
             <div className="relative w-full h-full rounded-full border-2 border-cosmos-primary glow-primary overflow-hidden bg-cosmos-surface">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://github.com/gilangmgm98.png"
+                src="/foto.png"
                 alt="Muhammad Gilang Murdiyanto"
                 className="w-full h-full object-cover"
               />
