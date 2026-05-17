@@ -36,6 +36,19 @@ export const projects: Project[] = [
   },
   {
     type: 'side',
+    title: 'Private Life of Us',
+    description: 'A personal love website gifted to my partner as a birthday surprise — a private digital keepsake built with care.',
+    tags: ['Personal', 'Web'],
+    githubUrl: 'https://github.com/gilangmgm98/privatelifeofus',
+  },
+  {
+    type: 'side',
+    title: 'Printbook — Digital Printing SaaS',
+    description: 'Upcoming SaaS platform for digital printing businesses still running on manual workflows. Designed to digitize order management, production tracking, and customer communication in one system.',
+    tags: ['SaaS', 'NestJS', 'Next.js', 'In Progress'],
+  },
+  {
+    type: 'side',
     title: 'Portfolio Website',
     description: 'This portfolio — built with Next.js, GSAP, Three.js, and Tailwind CSS. Dark Cosmos theme with full-page snap scroll and immersive particle animations.',
     tags: ['Next.js', 'TypeScript', 'GSAP', 'Three.js', 'Tailwind'],
