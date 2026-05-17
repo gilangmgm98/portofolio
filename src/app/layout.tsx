@@ -15,6 +15,10 @@ const GeistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Gilang Murdiyanto — Backend Developer',
   description: 'Backend developer with 3+ years of experience building scalable REST APIs and high-performance backend systems.',
+  icons: {
+    icon: '/GM-monogram.webp',
+    apple: '/GM-monogram.webp',
+  },
   openGraph: {
     title: 'Gilang Murdiyanto — Backend Developer',
     description: 'TypeScript · NestJS · Node.js',
