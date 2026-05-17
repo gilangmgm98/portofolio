@@ -29,9 +29,9 @@ export default function Projects() {
           <p className="text-cosmos-primary text-xs tracking-[0.4em] uppercase font-mono mb-2">05 / Projects</p>
           <h2 className="text-4xl md:text-5xl font-black text-cosmos-text">Selected Work</h2>
         </div>
-        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
           {projects.map((project) => (
-            <div key={project.title} className="project-card-wrapper">
+            <div key={project.title} className="project-card-wrapper h-full">
               <ProjectCard project={project} />
             </div>
           ))}

@@ -29,7 +29,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="bg-cosmos-surface border border-cosmos-border rounded-lg p-6 flex flex-col gap-4 hover:border-cosmos-primary/40 transition-colors duration-300 will-change-transform"
+      className="h-full bg-cosmos-surface border border-cosmos-border rounded-lg p-6 flex flex-col gap-4 hover:border-cosmos-primary/40 transition-colors duration-300 will-change-transform"
       style={{ transformStyle: 'preserve-3d' }}
     >
       <div className="flex items-start justify-between">
@@ -49,17 +49,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         ))}
       </div>
       {project.type === 'side' && (project.githubUrl || project.liveUrl) && (
-        <div className="flex gap-3 pt-2 border-t border-cosmos-border">
+        <div className="flex gap-3 pt-3 border-t border-cosmos-border mt-auto">
           {project.githubUrl && (
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-              className="text-cosmos-muted hover:text-cosmos-primary text-xs tracking-widest uppercase transition-colors duration-200">
-              GitHub →
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-cosmos-primary/70 text-cosmos-primary text-xs font-mono tracking-wider hover:bg-cosmos-primary hover:text-white transition-all duration-200">
+              ↗ Repo
             </a>
           )}
           {project.liveUrl && (
             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label="Live"
-              className="text-cosmos-muted hover:text-cosmos-accent text-xs tracking-widest uppercase transition-colors duration-200">
-              Live →
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-cosmos-accent text-cosmos-accent text-xs font-mono tracking-wider hover:bg-cosmos-accent hover:text-cosmos-bg transition-all duration-200">
+              ↗ Visit
             </a>
           )}
         </div>
