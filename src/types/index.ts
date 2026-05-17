@@ -15,16 +15,23 @@ export interface Experience {
   tags: string[]
 }
 
-export type ProjectType = 'work' | 'side'
-
-export interface Project {
-  type: ProjectType
+export interface WorkProject {
+  type: 'work'
   title: string
   description: string
   tags: string[]
-  githubUrl?: string    // only for side projects
-  liveUrl?: string      // only for side projects
 }
+
+export interface SideProject {
+  type: 'side'
+  title: string
+  description: string
+  tags: string[]
+  githubUrl?: string
+  liveUrl?: string
+}
+
+export type Project = WorkProject | SideProject
 
 export interface Achievement {
   value: number

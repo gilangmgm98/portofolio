@@ -2,7 +2,7 @@ import { skills } from '@/data/skills'
 import { experiences } from '@/data/experience'
 import { projects } from '@/data/projects'
 import { achievements } from '@/data/achievements'
-import type { Skill, Experience, Project, Achievement } from '@/types'
+import type { Skill, Experience, Project, SideProject, Achievement } from '@/types'
 
 describe('skills data', () => {
   it('has at least 10 skills', () => {
@@ -37,17 +37,16 @@ describe('projects data', () => {
     expect(work.length).toBeGreaterThan(0)
     expect(side.length).toBeGreaterThan(0)
   })
-  it('work projects have no links', () => {
-    projects
-      .filter((p: Project) => p.type === 'work')
-      .forEach((p: Project) => {
-        expect(p.githubUrl).toBeUndefined()
-        expect(p.liveUrl).toBeUndefined()
-      })
+  it('each project has required display fields', () => {
+    projects.forEach((p: Project) => {
+      expect(p.title).toBeTruthy()
+      expect(p.description).toBeTruthy()
+      expect(p.tags.length).toBeGreaterThan(0)
+    })
   })
   it('side projects may have github and live urls', () => {
-    const side = projects.filter((p: Project) => p.type === 'side')
-    side.forEach((p: Project) => {
+    const side = projects.filter((p: Project): p is SideProject => p.type === 'side')
+    side.forEach((p: SideProject) => {
       if (p.githubUrl) expect(p.githubUrl).toMatch(/^https?:\/\//)
       if (p.liveUrl) expect(p.liveUrl).toMatch(/^https?:\/\//)
     })
