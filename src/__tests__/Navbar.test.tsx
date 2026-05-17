@@ -13,6 +13,7 @@ describe('Navbar', () => {
     expect(screen.getByText('Skills')).toBeInTheDocument()
     expect(screen.getByText('Experience')).toBeInTheDocument()
     expect(screen.getByText('Projects')).toBeInTheDocument()
+    expect(screen.getByText('Achievements')).toBeInTheDocument()
     expect(screen.getByText('Contact')).toBeInTheDocument()
   })
 
