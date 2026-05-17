@@ -5,6 +5,7 @@ export const skills: Skill[] = [
   { name: 'JavaScript', icon: 'javascript', category: 'language' },
   { name: 'PHP', icon: 'php', category: 'language' },
   { name: 'Node.js', icon: 'nodedotjs', category: 'language' },
+  { name: 'Next.js', icon: 'nextdotjs', category: 'framework' },
   { name: 'NestJS', icon: 'nestjs', category: 'framework' },
   { name: 'CodeIgniter', icon: 'codeigniter', category: 'framework' },
   { name: 'React', icon: 'react', category: 'framework' },
