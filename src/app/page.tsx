@@ -12,13 +12,13 @@ const SECTION_COUNT = 7
 export default function Page() {
   return (
     <SnapContainer sectionCount={SECTION_COUNT}>
-      <div className="md:snap-start"><Hero /></div>
-      <div className="md:snap-start"><About /></div>
-      <div className="md:snap-start"><Skills /></div>
-      <div className="md:snap-start"><Experience /></div>
-      <div className="md:snap-start"><Projects /></div>
-      <div className="md:snap-start"><Achievements /></div>
-      <div className="md:snap-start"><Contact /></div>
+      <div className="md:snap-start md:h-screen md:overflow-hidden"><Hero /></div>
+      <div className="md:snap-start md:h-screen md:overflow-hidden"><About /></div>
+      <div className="md:snap-start md:h-screen md:overflow-hidden"><Skills /></div>
+      <div className="md:snap-start md:h-screen md:overflow-hidden"><Experience /></div>
+      <div className="md:snap-start md:h-screen md:overflow-hidden"><Projects /></div>
+      <div className="md:snap-start md:h-screen md:overflow-hidden"><Achievements /></div>
+      <div className="md:snap-start md:h-screen md:overflow-hidden"><Contact /></div>
     </SnapContainer>
   )
 }

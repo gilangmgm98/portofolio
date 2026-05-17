@@ -46,10 +46,7 @@ export default function SnapContainer({ children, sectionCount }: SnapContainerP
     <>
       <Navbar activeSection={activeSection} />
       <DotNav total={sectionCount} active={activeSection} onNavigate={navigateToSection} />
-      <div
-        ref={containerRef}
-        className="snap-container md:overflow-y-scroll md:snap-y md:snap-mandatory h-screen"
-      >
+      <div ref={containerRef} className="snap-container">
         {children}
       </div>
     </>

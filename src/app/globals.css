@@ -25,6 +25,14 @@ body {
   overflow-x: hidden;
 }
 
+@media (min-width: 768px) {
+  html {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+}
+
 .snap-container::-webkit-scrollbar {
   display: none;
 }
