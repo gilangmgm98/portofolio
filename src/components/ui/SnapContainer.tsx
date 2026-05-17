@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { registerGSAP, createMatchMedia } from '@/lib/gsap'
+import { createMatchMedia } from '@/lib/gsap'
 import Navbar from '@/components/ui/Navbar'
 import DotNav from '@/components/ui/DotNav'
 
@@ -13,10 +13,6 @@ interface SnapContainerProps {
 export default function SnapContainer({ children, sectionCount }: SnapContainerProps) {
   const [activeSection, setActiveSection] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    registerGSAP()
-  }, [])
 
   useEffect(() => {
     const mm = createMatchMedia()
