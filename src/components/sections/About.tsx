@@ -50,13 +50,17 @@ export default function About() {
             <h2 className="text-4xl md:text-5xl font-black text-cosmos-text">Who I Am</h2>
           </div>
           <p className="text-cosmos-muted leading-relaxed">
-            Backend developer with <span className="text-cosmos-text font-semibold">3+ years</span> of experience
-            building scalable REST APIs, high-performance backend systems, and AI/data-driven products.
-            Passionate about clean architecture, performance tuning, and delivering reliable production services.
+            Backend developer with <span className="text-cosmos-text font-semibold">3+ years</span> shipping
+            production systems used by millions. Currently at CODE.ID owning the REST APIs powering{' '}
+            <span className="text-cosmos-text font-semibold">MyTelkomsel</span> — one of Indonesia&apos;s
+            largest telco super apps — with full responsibility over reliability, API contracts, and performance.
           </p>
           <p className="text-cosmos-muted leading-relaxed">
-            Currently owning backend services for <span className="text-cosmos-text font-semibold">MyTelkomsel</span> at CODE.ID —
-            focusing on API design, performance optimization, and maintainability.
+            Previously cut data processing time by{' '}
+            <span className="text-cosmos-text font-semibold">~20%</span> through ORM profiling and query
+            optimization, and engineered a centralized platform integrating 4 communication channels including
+            Asterisk PBX and WhatsApp Business API. I care about clean architecture not as an ideal, but as a
+            practice that keeps production systems maintainable at scale.
           </p>
           <div className="flex gap-4 pt-2">
             {SOCIAL_LINKS.map((link) => (
