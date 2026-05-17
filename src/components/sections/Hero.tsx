@@ -8,8 +8,9 @@ const StarField = dynamic(() => import('@/components/three/StarField'), { ssr: f
 
 export default function Hero() {
   const labelRef = useRef<HTMLParagraphElement>(null)
-  const line1Ref = useRef<HTMLHeadingElement>(null)
-  const line2Ref = useRef<HTMLHeadingElement>(null)
+  const line1Ref = useRef<HTMLSpanElement>(null)
+  const line2Ref = useRef<HTMLSpanElement>(null)
+  const line3Ref = useRef<HTMLSpanElement>(null)
   const taglineRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -18,11 +19,13 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.3 })
       tl.from(labelRef.current, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' })
-      if (line1Ref.current && line2Ref.current) {
+      if (line1Ref.current && line2Ref.current && line3Ref.current) {
         const split1 = new SplitText(line1Ref.current, { type: 'chars' })
         const split2 = new SplitText(line2Ref.current, { type: 'chars' })
-        tl.from(split1.chars, { opacity: 0, y: 60, duration: 0.8, stagger: 0.04, ease: 'power3.out' }, '-=0.3')
-        tl.from(split2.chars, { opacity: 0, y: 60, duration: 0.8, stagger: 0.04, ease: 'power3.out' }, '-=0.6')
+        const split3 = new SplitText(line3Ref.current, { type: 'chars' })
+        tl.from(split1.chars, { opacity: 0, y: 40, duration: 0.6, stagger: 0.03, ease: 'power3.out' }, '-=0.3')
+        tl.from(split2.chars, { opacity: 0, y: 60, duration: 0.8, stagger: 0.04, ease: 'power3.out' }, '-=0.4')
+        tl.from(split3.chars, { opacity: 0, y: 60, duration: 0.8, stagger: 0.04, ease: 'power3.out' }, '-=0.6')
       }
       tl.from(taglineRef.current, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, '-=0.4')
       tl.from(ctaRef.current, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, '-=0.3')
@@ -44,10 +47,13 @@ export default function Hero() {
           BACKEND DEVELOPER
         </p>
         <h1 className="leading-none mb-2">
-          <span ref={line1Ref} className="block text-[clamp(4rem,12vw,10rem)] font-black text-cosmos-text">
+          <span ref={line1Ref} className="block text-[clamp(1.5rem,5vw,4rem)] font-black text-cosmos-accent tracking-[0.15em] uppercase">
+            Muhammad
+          </span>
+          <span ref={line2Ref} className="block text-[clamp(4rem,12vw,10rem)] font-black text-cosmos-text leading-[0.9]">
             GILANG
           </span>
-          <span ref={line2Ref} className="block text-[clamp(4rem,12vw,10rem)] font-black text-cosmos-primary">
+          <span ref={line3Ref} className="block text-[clamp(4rem,12vw,10rem)] font-black text-cosmos-primary leading-[0.9]">
             MURDIYANTO
           </span>
         </h1>

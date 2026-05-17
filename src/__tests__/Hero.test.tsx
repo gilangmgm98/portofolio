@@ -2,6 +2,10 @@ import { render, screen } from '@testing-library/react'
 import Hero from '@/components/sections/Hero'
 
 describe('Hero', () => {
+  it('renders Muhammad', () => {
+    render(<Hero />)
+    expect(screen.getByText('Muhammad')).toBeInTheDocument()
+  })
   it('renders GILANG', () => {
     render(<Hero />)
     expect(screen.getByText('GILANG')).toBeInTheDocument()
