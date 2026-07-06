@@ -1,7 +1,7 @@
 export interface Skill {
   name: string
   icon: string       // simple-icons slug or url
-  category: 'language' | 'framework' | 'database' | 'infra' | 'integration'
+  category: 'language' | 'framework' | 'database' | 'infra' | 'integration' | 'ai'
 }
 
 export interface Experience {

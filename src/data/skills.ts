@@ -20,4 +20,10 @@ export const skills: Skill[] = [
   { name: 'Git', icon: 'git', category: 'infra' },
   { name: 'WhatsApp API', icon: 'whatsapp', category: 'integration' },
   { name: 'Asterisk PBX', icon: 'asterisk', category: 'integration' },
+
+  { name: 'Claude', icon: 'claude', category: 'ai' },
+  { name: 'GitHub Copilot', icon: 'githubcopilot', category: 'ai' },
+  { name: 'Cursor', icon: 'cursor', category: 'ai' },
+  { name: 'Perplexity', icon: 'perplexity', category: 'ai' },
+  { name: 'Windsurf', icon: 'windsurf', category: 'ai' },
 ]
