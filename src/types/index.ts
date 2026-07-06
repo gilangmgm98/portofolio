@@ -29,6 +29,7 @@ export interface SideProject {
   tags: string[]
   githubUrl?: string
   liveUrl?: string
+  isCurrentSite?: boolean
 }
 
 export type Project = WorkProject | SideProject

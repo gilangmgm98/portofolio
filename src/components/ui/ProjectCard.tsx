@@ -48,7 +48,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </span>
         ))}
       </div>
-      {project.type === 'side' && (project.githubUrl || project.liveUrl) && (
+      {project.type === 'side' && (project.githubUrl || project.liveUrl || project.isCurrentSite) && (
         <div className="flex gap-3 pt-3 border-t border-cosmos-border mt-auto">
           {project.githubUrl && (
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
@@ -56,11 +56,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               ↗ Repo
             </a>
           )}
-          {project.liveUrl && (
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label="Live"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-cosmos-accent text-cosmos-accent text-xs font-mono tracking-wider hover:bg-cosmos-accent hover:text-cosmos-bg transition-all duration-200">
-              ↗ Visit
-            </a>
+          {project.isCurrentSite ? (
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-cosmos-accent/40 text-cosmos-accent/80 text-xs font-mono tracking-wider">
+              ● You&apos;re here
+            </span>
+          ) : (
+            project.liveUrl && (
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label="Live"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-cosmos-accent text-cosmos-accent text-xs font-mono tracking-wider hover:bg-cosmos-accent hover:text-cosmos-bg transition-all duration-200">
+                ↗ Visit
+              </a>
+            )
           )}
         </div>
       )}

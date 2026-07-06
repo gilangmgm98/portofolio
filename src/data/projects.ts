@@ -61,6 +61,6 @@ export const projects: Project[] = [
     description: 'This portfolio — built with Next.js, GSAP, Three.js, and Tailwind CSS. Dark Cosmos theme with full-page snap scroll and immersive particle animations.',
     tags: ['Next.js', 'TypeScript', 'GSAP', 'Three.js', 'Tailwind'],
     githubUrl: 'https://github.com/gilangmgm98/portofolio',
-    liveUrl: 'https://www.gilangmgm.my.id/',
+    isCurrentSite: true,
   },
 ]
