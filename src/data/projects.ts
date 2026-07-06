@@ -26,6 +26,7 @@ export const projects: Project[] = [
     title: 'Kasir Digital — SaaS POS for UMKM',
     description: 'Multi-tenant SaaS point-of-sale for Indonesian small businesses. Supports multi-outlet, inventory, QRIS/Midtrans payments, staff RBAC, PDF reports, and a hidden super-admin panel. Three subscription tiers with 14-day trial.',
     tags: ['NestJS', 'Next.js', 'Prisma', 'PostgreSQL', 'Redis', 'Midtrans'],
+    liveUrl: 'https://kasirdigital.online/',
   },
   {
     type: 'side',
@@ -60,6 +61,6 @@ export const projects: Project[] = [
     description: 'This portfolio — built with Next.js, GSAP, Three.js, and Tailwind CSS. Dark Cosmos theme with full-page snap scroll and immersive particle animations.',
     tags: ['Next.js', 'TypeScript', 'GSAP', 'Three.js', 'Tailwind'],
     githubUrl: 'https://github.com/gilangmgm98/portofolio',
-    liveUrl: 'https://gilangmgm.vercel.app',
+    liveUrl: 'https://www.gilangmgm.my.id/',
   },
 ]
