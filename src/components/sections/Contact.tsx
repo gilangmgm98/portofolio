@@ -38,7 +38,7 @@ export default function Contact() {
   }
 
   return (
-    <section ref={sectionRef} className="portfolio-section w-full h-screen flex items-center justify-center bg-cosmos-bg px-6 md:px-16">
+    <section ref={sectionRef} className="portfolio-section w-full min-h-screen md:h-screen flex items-center justify-center bg-cosmos-bg px-6 md:px-16 py-20 md:py-0">
       <div ref={contentRef} className="max-w-2xl w-full text-center space-y-8">
         <div>
           <p className="text-cosmos-primary text-xs tracking-[0.4em] uppercase font-mono mb-2">07 / Contact</p>

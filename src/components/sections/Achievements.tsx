@@ -8,7 +8,7 @@ export default function Achievements() {
   const sectionRef = useRef<HTMLElement>(null)
 
   return (
-    <section ref={sectionRef} className="portfolio-section w-full h-screen flex flex-col items-center justify-center bg-cosmos-bg px-6 md:px-16">
+    <section ref={sectionRef} className="portfolio-section w-full min-h-screen md:h-screen flex flex-col items-center justify-center bg-cosmos-bg px-6 md:px-16 py-20 md:py-0">
       <div className="max-w-5xl w-full">
         <div className="mb-16 text-center">
           <p className="text-cosmos-primary text-xs tracking-[0.4em] uppercase font-mono mb-2">06 / Achievements</p>

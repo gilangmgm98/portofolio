@@ -29,7 +29,7 @@ export default function About() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="portfolio-section w-full h-screen flex items-center justify-center bg-cosmos-bg px-6 md:px-16">
+    <section ref={sectionRef} className="portfolio-section w-full min-h-screen md:h-screen flex items-center justify-center bg-cosmos-bg px-6 md:px-16 py-20 md:py-0">
       <div className="max-w-5xl w-full grid md:grid-cols-2 gap-12 items-center">
         <div ref={leftRef} className="flex justify-center">
           <div className="relative w-64 h-64 md:w-80 md:h-80">
