@@ -2,10 +2,10 @@ import type { Achievement } from '@/types'
 
 export const achievements: Achievement[] = [
   {
-    value: 3,
+    value: 4,
     suffix: '+',
     label: 'Years of Experience',
-    description: 'Building production-grade backend systems',
+    description: 'From IT support to backend engineering',
   },
   {
     value: 20,
@@ -14,10 +14,10 @@ export const achievements: Achievement[] = [
     description: 'Via ORM profiling and query optimization',
   },
   {
-    value: 4,
+    value: 2,
     suffix: '',
-    label: 'Channels Integrated',
-    description: 'In a single centralized platform',
+    label: 'Zero-Defect Sprints',
+    description: 'Consecutive sprints with 0 backend defects',
   },
   {
     value: 2,

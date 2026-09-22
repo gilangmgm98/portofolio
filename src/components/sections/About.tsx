@@ -50,17 +50,20 @@ export default function About() {
             <h2 className="text-4xl md:text-5xl font-black text-cosmos-text">Who I Am</h2>
           </div>
           <p className="text-cosmos-muted leading-relaxed">
-            Backend developer with <span className="text-cosmos-text font-semibold">3+ years</span> shipping
-            production systems used by millions. Currently at CODE.ID owning the REST APIs powering{' '}
-            <span className="text-cosmos-text font-semibold">MyTelkomsel</span> — one of Indonesia&apos;s
-            largest telco super apps — with full responsibility over reliability, API contracts, and performance.
+            Backend developer with <span className="text-cosmos-text font-semibold">4+ years</span> across IT
+            support and software engineering, shipping production systems used by millions. Currently at CODE.ID
+            owning the REST APIs powering <span className="text-cosmos-text font-semibold">MyTelkomsel</span> —
+            one of Indonesia&apos;s largest telco super apps — with full responsibility over reliability, API
+            contracts, and performance. Delivered the last{' '}
+            <span className="text-cosmos-text font-semibold">2 sprints with zero backend defects</span>.
           </p>
           <p className="text-cosmos-muted leading-relaxed">
             Previously cut data processing time by{' '}
             <span className="text-cosmos-text font-semibold">~20%</span> through ORM profiling and query
             optimization, and engineered a centralized platform integrating 4 communication channels including
-            Asterisk PBX and WhatsApp Business API. I care about clean architecture not as an ideal, but as a
-            practice that keeps production systems maintainable at scale.
+            Asterisk PBX and WhatsApp Business API. Beyond application code, I run and maintain a self-hosted
+            infrastructure stack — Proxmox virtualization, containerized services, zero-trust networking —
+            because understanding what my code runs on makes me a better engineer, not just a better coder.
           </p>
           <div className="flex gap-4 pt-2">
             {SOCIAL_LINKS.map((link) => (
