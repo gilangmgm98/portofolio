@@ -14,7 +14,7 @@ export default function Achievements() {
           <p className="text-cosmos-primary text-xs tracking-[0.4em] uppercase font-mono mb-2">06 / Achievements</p>
           <h2 className="text-4xl md:text-5xl font-black text-cosmos-text">By The Numbers</h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
           {achievements.map((a) => (
             <AchievementStat key={a.label} {...a} triggerRef={sectionRef} />
           ))}

@@ -25,4 +25,10 @@ export const achievements: Achievement[] = [
     label: 'Companies',
     description: 'Delivering scalable backend products',
   },
+  {
+    value: 10,
+    suffix: '',
+    label: 'Side Projects',
+    description: 'Built and shipped outside full-time work',
+  },
 ]

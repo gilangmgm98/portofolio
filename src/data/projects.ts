@@ -45,9 +45,27 @@ export const projects: Project[] = [
   {
     type: 'side',
     title: 'Private Life of Us',
-    description: 'A personal love website gifted to my partner as a birthday surprise — a private digital keepsake built with care.',
+    description: 'A personal love website gifted to my partner as a birthday surprise — a private digital keepsake built with care. Grew into a small ecosystem with its own landing/chooser page and a companion shared cashflow tracker for the two of us.',
     tags: ['Personal', 'Web'],
     githubUrl: 'https://github.com/gilangmgm98/privatelifeofus',
+  },
+  {
+    type: 'side',
+    title: 'Property Rental Manager',
+    description: 'An installable PWA for the family business — manages tenants, leases, billing, and monitoring across rented houses, boarding rooms, shops, and warehouses, with offline fallback for on-site use.',
+    tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'PWA'],
+  },
+  {
+    type: 'side',
+    title: 'Family Cashflow Tracker',
+    description: 'A shared finance tracker built to keep family income, expenses, and budgeting visible and organized in one place.',
+    tags: ['Next.js', 'TypeScript', 'PostgreSQL'],
+  },
+  {
+    type: 'side',
+    title: 'Hutang Piutang — Debt & Receivables Tracker',
+    description: 'A lightweight personal tracker for keeping informal loans between family and friends recorded and accountable.',
+    tags: ['Next.js', 'TypeScript', 'PostgreSQL'],
   },
   {
     type: 'side',
