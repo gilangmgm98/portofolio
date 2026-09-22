@@ -57,6 +57,12 @@ export const projects: Project[] = [
   },
   {
     type: 'side',
+    title: 'Self-Hosted Cloud Infrastructure Platform',
+    description: 'A home-lab cloud platform built on Proxmox VE — isolated VMs/LXCs running TrueNAS/ZFS storage, containerized self-hosted apps behind a Caddy reverse proxy, and zero-trust remote access via Tailscale and Cloudflare Tunnel with no inbound ports exposed. Includes SSH/firewall hardening and automated resource & network monitoring.',
+    tags: ['Proxmox', 'Docker', 'Linux', 'ZFS', 'Networking', 'Zero-Trust'],
+  },
+  {
+    type: 'side',
     title: 'Portfolio Website',
     description: 'This portfolio — built with Next.js, GSAP, Three.js, and Tailwind CSS. Dark Cosmos theme with full-page snap scroll and immersive particle animations.',
     tags: ['Next.js', 'TypeScript', 'GSAP', 'Three.js', 'Tailwind'],
