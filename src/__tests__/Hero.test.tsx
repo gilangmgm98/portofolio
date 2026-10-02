@@ -42,4 +42,16 @@ describe('Hero', () => {
     render(<Hero />)
     expect(screen.getByRole('link', { name: 'Scroll to About' }).closest('[data-magnetic]')).not.toBeNull()
   })
+
+  it('gives the headline a gentle parallax + velocity skew and the badge its own faster parallax', () => {
+    const { container } = render(<Hero />)
+    const h1 = screen.getByRole('heading', { level: 1 })
+    expect(h1).toHaveAttribute('data-parallax', '0.18')
+    expect(h1).toHaveAttribute('data-parallax-start', 'top top')
+    expect(h1).toHaveAttribute('data-skew')
+    const badge = screen.getByRole('link', { name: 'Scroll to About' }).closest('[data-parallax]')
+    expect(badge).not.toBeNull()
+    expect(Number(badge!.getAttribute('data-parallax'))).toBeLessThan(0)
+    expect(container.querySelector('[style]')).toBeNull()
+  })
 })

@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer'
 import Reveals from '@/components/layout/Reveals'
 import Cursor from '@/components/layout/Cursor'
 import PointerEffects from '@/components/layout/PointerEffects'
+import ScrollMotion from '@/components/layout/ScrollMotion'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Impact from '@/components/sections/Impact'
@@ -40,6 +41,7 @@ export default function Page() {
         <Footer />
       </div>
       <Reveals />
+      <ScrollMotion />
       <PointerEffects />
       <Cursor />
     </LenisProvider>

@@ -16,6 +16,7 @@ export default function Contact() {
       </MaskTitle>
       <MaskTitle
         as="h2"
+        skew
         className="my-8 font-display text-[clamp(3rem,12.5vw,12rem)] font-extrabold leading-[0.9] tracking-display text-ink"
       >
         Let&apos;s talk

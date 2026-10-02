@@ -94,4 +94,9 @@ describe('Contact submit flow', () => {
       expect(el.closest('[data-magnetic]')).not.toBeNull()
     }
   })
+
+  it('skews the giant heading with scroll velocity', () => {
+    render(<Contact />)
+    expect(screen.getByRole('heading', { level: 2, name: "Let's talk" })).toHaveAttribute('data-skew')
+  })
 })

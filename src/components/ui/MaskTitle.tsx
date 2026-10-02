@@ -11,6 +11,11 @@ interface MaskTitleProps {
   delay?: number
   /** stagger (s) between lines; headings use the default, paragraphs read better with less */
   stagger?: number
+  /** parallax speed (see ScrollMotion) and where it starts */
+  parallax?: number
+  parallaxStart?: string
+  /** lean with scroll velocity (see ScrollMotion) */
+  skew?: boolean
   className?: string
   children: React.ReactNode
 }
@@ -22,6 +27,9 @@ export default function MaskTitle({
   trigger = 'scroll',
   delay = 0,
   stagger = 0.08,
+  parallax,
+  parallaxStart,
+  skew,
   className,
   children,
 }: MaskTitleProps) {
@@ -62,7 +70,14 @@ export default function MaskTitle({
   }, [trigger, delay, stagger])
 
   return (
-    <Tag ref={ref} data-reveal="mask" className={className}>
+    <Tag
+      ref={ref}
+      data-reveal="mask"
+      data-parallax={parallax}
+      data-parallax-start={parallaxStart}
+      data-skew={skew ? '' : undefined}
+      className={className}
+    >
       {children}
     </Tag>
   )
