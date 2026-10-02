@@ -1,22 +1,21 @@
 import { render, screen } from '@testing-library/react'
 import Experience from '@/components/sections/Experience'
+import { experiences } from '@/data/experience'
 
 describe('Experience', () => {
-  it('renders section label', () => {
+  it('is the Experience region', () => {
     render(<Experience />)
-    expect(screen.getByText(/04 \/ Experience/i)).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Experience' })).toHaveAttribute('id', 'experience')
   })
-  it('renders CODE.ID entry', () => {
+
+  it('renders CODE.ID and eCentrix entries', () => {
     render(<Experience />)
     expect(screen.getByText('CODE.ID')).toBeInTheDocument()
+    expect(screen.getAllByText('eCentrix Solutions').length).toBeGreaterThanOrEqual(1)
   })
-  it('renders eCentrix entries', () => {
-    render(<Experience />)
-    const entries = screen.getAllByText('eCentrix Solutions')
-    expect(entries.length).toBeGreaterThanOrEqual(1)
-  })
+
   it('renders every experience entry (content never gated on scroll)', () => {
     render(<Experience />)
-    expect(screen.getAllByText(/Developer|Support/).length).toBeGreaterThanOrEqual(3)
+    expect(screen.getAllByRole('article')).toHaveLength(experiences.length)
   })
 })
