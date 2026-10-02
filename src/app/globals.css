@@ -248,3 +248,46 @@ html.has-cursor [data-cursor] {
 .aurora-canvas[data-on] {
   opacity: 1;
 }
+
+/* ---------- Editorial: menu overlay ---------- */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgb(var(--bg-rgb));
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition:
+    clip-path 500ms cubic-bezier(0.65, 0, 0.35, 1),
+    visibility 0s linear 500ms;
+}
+.menu-overlay[data-open='true'] {
+  clip-path: inset(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+.menu-link {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+  transition-delay: calc(150ms + var(--i) * 40ms);
+}
+.menu-overlay[data-open='true'] .menu-link {
+  opacity: 1;
+  transform: none;
+}
+html[data-menu-open] {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-overlay,
+  .menu-link {
+    transition: none;
+  }
+  .menu-link {
+    opacity: 1;
+    transform: none;
+  }
+}
