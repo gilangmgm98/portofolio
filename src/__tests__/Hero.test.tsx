@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Hero from '@/components/sections/Hero'
 
 describe('Hero', () => {
@@ -14,9 +15,9 @@ describe('Hero', () => {
     render(<Hero />)
     expect(screen.getByText('MURDIYANTO')).toBeInTheDocument()
   })
-  it('renders BACKEND DEVELOPER label', () => {
+  it('renders Backend Developer label', () => {
     render(<Hero />)
-    expect(screen.getByText('BACKEND DEVELOPER')).toBeInTheDocument()
+    expect(screen.getByText('Backend Developer')).toBeInTheDocument()
   })
   it('renders View Work CTA', () => {
     render(<Hero />)
@@ -25,5 +26,16 @@ describe('Hero', () => {
   it('renders Contact CTA', () => {
     render(<Hero />)
     expect(screen.getByText('Contact')).toBeInTheDocument()
+  })
+  it('CTAs scroll to a section', async () => {
+    const user = userEvent.setup()
+    render(
+      <>
+        <Hero />
+        {Array.from({ length: 6 }).map((_, i) => <section key={i} className="portfolio-section" />)}
+      </>
+    )
+    await user.click(screen.getByText('Contact'))
+    expect(Element.prototype.scrollIntoView).toHaveBeenCalled()
   })
 })
