@@ -156,18 +156,52 @@ html.has-cursor [data-cursor] {
   cursor: none;
 }
 
-/* ---------- Editorial: aurora ---------- */
-.aurora-fallback {
-  background:
-    radial-gradient(60% 50% at 25% 15%, rgb(var(--primary-rgb) / 0.16), transparent 70%),
-    radial-gradient(45% 45% at 85% 70%, rgb(var(--coral-rgb) / 0.1), transparent 70%);
+/* ---------- Editorial: aurora (CSS-only, transform-only: composited, no repaint) ---------- */
+.aurora-glow {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 9999px;
+  will-change: transform;
 }
-.aurora-canvas {
-  opacity: 0;
-  transition: opacity 1200ms var(--ease-out);
+.aurora-glow[data-i='0'] {
+  left: -15vmax;
+  top: -25vmax;
+  background: radial-gradient(circle, rgb(var(--primary-rgb) / 0.3), transparent 65%);
+  animation: aurora-drift-a 70s ease-in-out infinite alternate;
 }
-.aurora-canvas[data-on] {
-  opacity: 1;
+.aurora-glow[data-i='1'] {
+  right: -20vmax;
+  bottom: -30vmax;
+  background: radial-gradient(circle, rgb(var(--coral-rgb) / 0.2), transparent 65%);
+  animation: aurora-drift-b 90s ease-in-out infinite alternate;
+}
+.aurora-glow[data-i='2'] {
+  left: 25vw;
+  bottom: -40vmax;
+  background: radial-gradient(circle, rgb(120 90 255 / 0.22), transparent 65%);
+  animation: aurora-drift-c 110s ease-in-out infinite alternate;
+}
+@keyframes aurora-drift-a {
+  to {
+    transform: translate3d(22vw, 14vh, 0) scale(1.15);
+  }
+}
+@keyframes aurora-drift-b {
+  to {
+    transform: translate3d(-20vw, -12vh, 0) scale(0.9);
+  }
+}
+@keyframes aurora-drift-c {
+  to {
+    transform: translate3d(-18vw, -16vh, 0) scale(1.1);
+  }
+}
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .aurora-glow {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 /* ---------- Editorial: menu overlay ---------- */
