@@ -83,4 +83,15 @@ describe('Contact submit flow', () => {
       resolve({ ok: true })
     })
   })
+
+  it('makes the email pill, Copy button and send button magnetic', () => {
+    render(<Contact />)
+    for (const el of [
+      screen.getByRole('link', { name: 'gilangmgm98@gmail.com' }),
+      screen.getByRole('button', { name: 'Copy Email' }),
+      screen.getByRole('button', { name: /send message/i }),
+    ]) {
+      expect(el.closest('[data-magnetic]')).not.toBeNull()
+    }
+  })
 })

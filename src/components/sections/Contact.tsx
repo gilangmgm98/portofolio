@@ -1,5 +1,6 @@
 import { profile, socialLinks } from '@/data/profile'
 import MaskTitle from '@/components/ui/MaskTitle'
+import Magnetic from '@/components/ui/Magnetic'
 import CopyButton from './CopyButton'
 import ContactForm from './ContactForm'
 
@@ -23,14 +24,18 @@ export default function Contact() {
         Open to backend roles and interesting projects. Email me or send a message below.
       </MaskTitle>
       <div data-reveal="fade" className="mt-10 flex flex-wrap items-center justify-center gap-3">
-        <a
-          href={`mailto:${profile.email}`}
-          data-cursor
-          className="grad-border inline-flex items-center rounded-full px-7 py-4 text-base font-bold text-ink md:text-lg"
-        >
-          {profile.email}
-        </a>
-        <CopyButton text={profile.email} />
+        <Magnetic>
+          <a
+            href={`mailto:${profile.email}`}
+            data-cursor
+            className="grad-border inline-flex items-center rounded-full px-7 py-4 text-base font-bold text-ink md:text-lg"
+          >
+            {profile.email}
+          </a>
+        </Magnetic>
+        <Magnetic>
+          <CopyButton text={profile.email} />
+        </Magnetic>
       </div>
       <div data-reveal="fade" className="mt-14 w-full max-w-xl">
         <ContactForm />

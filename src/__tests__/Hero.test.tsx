@@ -37,4 +37,9 @@ describe('Hero', () => {
     // the intro paragraph reveals line by line, like the headline
     expect(screen.getByText(profile.intro)).toHaveAttribute('data-reveal', 'mask')
   })
+
+  it('makes the scroll badge magnetic', () => {
+    render(<Hero />)
+    expect(screen.getByRole('link', { name: 'Scroll to About' }).closest('[data-magnetic]')).not.toBeNull()
+  })
 })

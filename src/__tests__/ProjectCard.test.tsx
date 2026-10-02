@@ -55,4 +55,11 @@ describe('ProjectCard', () => {
     expect((container.firstChild as HTMLElement).tagName).toBe('ARTICLE')
     expect(container.querySelector('[style]')).toBeNull()
   })
+
+  it('has a cursor-following glow and magnetic link buttons', () => {
+    const { container } = render(<ProjectCard project={sideProject} />)
+    expect(container.firstChild).toHaveAttribute('data-glow')
+    expect(screen.getByRole('link', { name: /github/i }).closest('[data-magnetic]')).not.toBeNull()
+    expect(screen.getByRole('link', { name: /live/i }).closest('[data-magnetic]')).not.toBeNull()
+  })
 })

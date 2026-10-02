@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react'
 import { profile } from '@/data/profile'
 import { useJakartaTime } from '@/lib/useJakartaTime'
 import ScrollLink from '@/components/ui/ScrollLink'
+import Magnetic from '@/components/ui/Magnetic'
 import MenuOverlay from './MenuOverlay'
 
 export default function TopBar() {
@@ -27,19 +28,21 @@ export default function TopBar() {
               {profile.city} <time className="inline-block min-w-[3.2ch] tabular-nums">{time}</time>
             </span>
           </p>
-          <button
-            type="button"
-            aria-expanded={open}
-            aria-controls="menu-overlay"
-            onClick={() => setOpen(true)}
-            className="flex items-center gap-3 text-sm font-semibold"
-          >
-            Menu
-            <span aria-hidden="true" className="flex flex-col gap-1.5">
-              <span className="h-px w-6 bg-ink" />
-              <span className="h-px w-6 bg-ink" />
-            </span>
-          </button>
+          <Magnetic>
+            <button
+              type="button"
+              aria-expanded={open}
+              aria-controls="menu-overlay"
+              onClick={() => setOpen(true)}
+              className="flex items-center gap-3 text-sm font-semibold"
+            >
+              Menu
+              <span aria-hidden="true" className="flex flex-col gap-1.5">
+                <span className="h-px w-6 bg-ink" />
+                <span className="h-px w-6 bg-ink" />
+              </span>
+            </button>
+          </Magnetic>
         </div>
       </header>
       <MenuOverlay open={open} onClose={close} />

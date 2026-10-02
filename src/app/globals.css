@@ -390,3 +390,27 @@ html[data-menu-open] {
 #site-content {
   overflow-x: clip;
 }
+
+/* ---------- Editorial: cursor-following glow (see PointerEffects) ---------- */
+.glow-card {
+  position: relative;
+}
+.glow-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(var(--primary-rgb) / 0.16),
+    transparent 70%
+  );
+  transition: opacity 300ms var(--ease-out);
+}
+@media (hover: hover) {
+  .glow-card:hover::before {
+    opacity: 1;
+  }
+}

@@ -2,6 +2,7 @@ import { profile } from '@/data/profile'
 import GradientText from '@/components/ui/GradientText'
 import MaskTitle from '@/components/ui/MaskTitle'
 import ScrollLink from '@/components/ui/ScrollLink'
+import Magnetic from '@/components/ui/Magnetic'
 
 export default function Hero() {
   return (
@@ -38,26 +39,28 @@ export default function Hero() {
         >
           {profile.intro}
         </MaskTitle>
-        <ScrollLink
-          id="about"
-          data-reveal="fade"
-          aria-label="Scroll to About"
-          className="relative hidden h-28 w-28 shrink-0 md:block"
-        >
-          <svg viewBox="0 0 120 120" className="hero-badge-spin h-full w-full" aria-hidden="true">
-            <defs>
-              <path id="badge-circle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
-            </defs>
-            <text fontSize="10.5" fontWeight="700" fill="currentColor">
-              <textPath href="#badge-circle" textLength="283">
-                SCROLL TO EXPLORE · SCROLL TO EXPLORE ·{' '}
-              </textPath>
-            </text>
-          </svg>
-          <span aria-hidden="true" className="absolute inset-0 grid place-items-center text-xl">
-            ↓
-          </span>
-        </ScrollLink>
+        <Magnetic className="hidden shrink-0 md:block">
+          <ScrollLink
+            id="about"
+            data-reveal="fade"
+            aria-label="Scroll to About"
+            className="relative block h-28 w-28"
+          >
+            <svg viewBox="0 0 120 120" className="hero-badge-spin h-full w-full" aria-hidden="true">
+              <defs>
+                <path id="badge-circle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
+              </defs>
+              <text fontSize="10.5" fontWeight="700" fill="currentColor">
+                <textPath href="#badge-circle" textLength="283">
+                  SCROLL TO EXPLORE · SCROLL TO EXPLORE ·{' '}
+                </textPath>
+              </text>
+            </svg>
+            <span aria-hidden="true" className="absolute inset-0 grid place-items-center text-xl">
+              ↓
+            </span>
+          </ScrollLink>
+        </Magnetic>
       </div>
     </section>
   )

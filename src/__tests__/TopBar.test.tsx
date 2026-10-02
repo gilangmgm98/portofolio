@@ -31,4 +31,9 @@ describe('TopBar', () => {
     expect(document.getElementById('menu-overlay')).toHaveAttribute('data-open', 'false')
     document.getElementById('site-content')?.remove()
   })
+
+  it('lets the Menu button be pulled toward the cursor (magnetic wrapper)', () => {
+    render(<TopBar />)
+    expect(screen.getByRole('button', { name: /^menu/i }).closest('[data-magnetic]')).not.toBeNull()
+  })
 })

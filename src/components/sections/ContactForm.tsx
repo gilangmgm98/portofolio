@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Magnetic from '@/components/ui/Magnetic'
 
 const FIELD =
   'w-full rounded-2xl border border-hairline bg-panel/70 px-4 py-3 text-sm text-ink outline-none transition-colors duration-150 placeholder:text-muted focus:border-violet focus-visible:ring-2 focus-visible:ring-violet/40'
@@ -50,9 +51,11 @@ export default function ContactForm() {
         className={`${FIELD} resize-none`}
         onChange={(e) => setForm({ ...form, message: e.target.value })}
       />
-      <button type="submit" disabled={status === 'loading'} className="btn-grad w-full disabled:opacity-50">
-        {status === 'loading' ? 'Sending...' : 'Send Message'}
-      </button>
+      <Magnetic className="block">
+        <button type="submit" disabled={status === 'loading'} className="btn-grad w-full disabled:opacity-50">
+          {status === 'loading' ? 'Sending...' : 'Send Message'}
+        </button>
+      </Magnetic>
       <div className="min-h-5 text-center text-sm" aria-live="polite">
         {status === 'success' && (
           <p className="status-in text-violet">Message sent! I&apos;ll get back to you soon.</p>

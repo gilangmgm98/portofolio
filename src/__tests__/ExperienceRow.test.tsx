@@ -46,4 +46,9 @@ describe('ExperienceRow', () => {
     expect(container.firstChild).toHaveAttribute('data-reveal')
     expect(container.querySelector('[style]')).toBeNull()
   })
+
+  it('highlights under the cursor on hover (glow)', () => {
+    const { container } = render(<ExperienceRow experience={experience} />)
+    expect(container.firstChild).toHaveAttribute('data-glow')
+  })
 })

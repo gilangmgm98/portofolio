@@ -16,6 +16,7 @@ const gsap = {
   from: jest.fn(),
   fromTo: jest.fn(),
   quickTo: jest.fn(() => jest.fn()),
+  getProperty: jest.fn(() => 0),
   timeline: jest.fn(() => timeline()),
   ticker: { add: jest.fn(), remove: jest.fn(), lagSmoothing: jest.fn() },
   matchMedia: jest.fn(() => ({

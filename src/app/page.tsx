@@ -5,6 +5,7 @@ import SplitLayout from '@/components/layout/SplitLayout'
 import Footer from '@/components/layout/Footer'
 import Reveals from '@/components/layout/Reveals'
 import Cursor from '@/components/layout/Cursor'
+import PointerEffects from '@/components/layout/PointerEffects'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Impact from '@/components/sections/Impact'
@@ -39,6 +40,7 @@ export default function Page() {
         <Footer />
       </div>
       <Reveals />
+      <PointerEffects />
       <Cursor />
     </LenisProvider>
   )
