@@ -234,3 +234,17 @@ html.has-cursor button,
 html.has-cursor [data-cursor] {
   cursor: none;
 }
+
+/* ---------- Editorial: aurora ---------- */
+.aurora-fallback {
+  background:
+    radial-gradient(60% 50% at 25% 15%, rgb(var(--primary-rgb) / 0.16), transparent 70%),
+    radial-gradient(45% 45% at 85% 70%, rgb(var(--coral-rgb) / 0.1), transparent 70%);
+}
+.aurora-canvas {
+  opacity: 0;
+  transition: opacity 1200ms var(--ease-out);
+}
+.aurora-canvas[data-on] {
+  opacity: 1;
+}
