@@ -306,3 +306,38 @@ html[data-menu-open] {
     animation: none;
   }
 }
+
+/* ---------- Editorial: sidebar scrollspy ---------- */
+.nav-item {
+  color: rgb(var(--muted-rgb));
+  transition: color 200ms var(--ease-out);
+}
+.nav-item::before {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+  transform-origin: left;
+  transition:
+    transform 300ms var(--ease-out),
+    opacity 300ms var(--ease-out);
+}
+.nav-item[aria-current='true'] {
+  color: rgb(var(--text-rgb));
+}
+.nav-item[aria-current='true']::before {
+  transform: scaleX(1.8);
+  opacity: 1;
+}
+@media (hover: hover) {
+  .nav-item:hover {
+    color: rgb(var(--text-rgb));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-item,
+  .nav-item::before {
+    transition: none;
+  }
+}
