@@ -408,3 +408,13 @@ html[data-menu-open] {
     animation: none;
   }
 }
+
+/* ---------- Editorial: contact status ---------- */
+.status-in {
+  animation: status-in 200ms var(--ease-out);
+}
+@keyframes status-in {
+  from {
+    opacity: 0;
+  }
+}
