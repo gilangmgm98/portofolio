@@ -1,10 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import dynamic from 'next/dynamic'
 import { gsap, SplitText } from '@/lib/gsap'
-
-const StarField = dynamic(() => import('@/components/three/StarField'), { ssr: false })
 
 export default function Hero() {
   const labelRef = useRef<HTMLParagraphElement>(null)
@@ -41,7 +38,6 @@ export default function Hero() {
 
   return (
     <section className="portfolio-section relative w-full h-screen flex items-center justify-center overflow-hidden bg-cosmos-bg">
-      <StarField particleCount={2000} />
       <div className="relative z-10 text-center px-6">
         <p ref={labelRef} className="text-cosmos-muted text-xs tracking-[0.4em] mb-6 uppercase font-mono">
           BACKEND DEVELOPER

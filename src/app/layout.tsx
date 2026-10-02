@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import MotionProvider from '@/components/motion/MotionProvider'
+import Backdrop from '@/components/layout/Backdrop'
 
 const GeistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,8 +31,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="bg-cosmos-bg text-cosmos-text antialiased">
-        <MotionProvider>{children}</MotionProvider>
+      <body className="text-cosmos-text antialiased">
+        <MotionProvider>
+          <Backdrop />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   )
