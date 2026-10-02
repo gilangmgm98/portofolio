@@ -41,4 +41,11 @@ describe('ImpactCard', () => {
     render(<ImpactCard stat={percent} index={1} total={5} />)
     expect(screen.getByText('02 / 05')).toHaveClass('whitespace-nowrap')
   })
+
+  it('dims through an opaque scrim layer instead of lowering the card opacity (no see-through stacking)', () => {
+    const { container } = render(<ImpactCard stat={plain} index={0} total={5} />)
+    const card = container.firstChild as HTMLElement
+    expect(card.querySelector('[data-impact-scrim]')).toHaveAttribute('aria-hidden', 'true')
+    expect(card).toHaveClass('relative') // anchors the scrim below lg, where the card is not sticky
+  })
 })

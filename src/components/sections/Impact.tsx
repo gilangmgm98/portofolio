@@ -39,19 +39,16 @@ export default function Impact() {
       })
     })
 
-    // Deck: the previous card shrinks and dims while the next one slides over it (lg+ only).
+    // Deck: the previous card shrinks and darkens (via its opaque scrim) while the next one slides over it (lg+ only).
     mm.add(`${MOTION_OK} and ${DESKTOP}`, () => {
       const root = deck.current
       if (!root) return
       const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-impact-card]'))
       cards.slice(0, -1).forEach((card, i) => {
-        gsap.to(card, {
-          scale: 0.94,
-          opacity: 0.55,
-          transformOrigin: 'top center',
-          ease: 'none',
-          scrollTrigger: { trigger: cards[i + 1], start: 'top 75%', end: 'top 25%', scrub: true },
-        })
+        const scrollTrigger = { trigger: cards[i + 1], start: 'top 75%', end: 'top 25%', scrub: true }
+        gsap.to(card, { scale: 0.94, transformOrigin: 'top center', ease: 'none', scrollTrigger })
+        const scrim = card.querySelector('[data-impact-scrim]')
+        if (scrim) gsap.to(scrim, { opacity: 0.55, ease: 'none', scrollTrigger })
       })
     })
   }, [])

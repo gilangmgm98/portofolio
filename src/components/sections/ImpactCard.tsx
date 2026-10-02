@@ -14,7 +14,7 @@ export default function ImpactCard({ stat, index, total }: ImpactCardProps) {
       data-impact-card
       data-tone={index % 3}
       style={{ top: `calc(5rem + ${index * 16}px)` }}
-      className="impact-card mb-6 rounded-card border border-hairline p-8 md:p-10 lg:sticky lg:mb-[10vh]"
+      className="impact-card relative mb-6 rounded-card border border-hairline p-8 md:p-10 lg:sticky lg:mb-[10vh]"
     >
       <div className="flex items-center justify-between text-[12.5px] font-bold uppercase tracking-[0.16em] text-muted">
         <span>{stat.label}</span>
@@ -38,6 +38,8 @@ export default function ImpactCard({ stat, index, total }: ImpactCardProps) {
           />
         </div>
       )}
+      {/* darkens the card as the next one slides over it; an opaque layer, so stacked cards never show through */}
+      <span data-impact-scrim aria-hidden="true" className="impact-scrim" />
     </article>
   )
 }

@@ -52,4 +52,7 @@ describe('globals.css', () => {
     expect(css).toMatch(/@keyframes breathe\s*\{[^}]*50%\s*\{[^}]*opacity:\s*0\.35/)
     expect(css).toMatch(/@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*\.status-dot\s*\{[^}]*animation:\s*none/)
   })
+  it('has an opaque scrim layer for the stacked impact cards', () => {
+    expect(css).toMatch(/\.impact-scrim\s*\{[^}]*background:\s*rgb\(var\(--bg-rgb\)\)[^}]*opacity:\s*0/)
+  })
 })

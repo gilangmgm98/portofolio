@@ -331,6 +331,14 @@ html[data-menu-open] {
     linear-gradient(160deg, rgb(var(--primary-rgb) / 0.22), rgb(var(--surface-rgb)) 65%),
     rgb(var(--surface-rgb));
 }
+.impact-scrim {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgb(var(--bg-rgb));
+  opacity: 0;
+  pointer-events: none;
+}
 .impact-card[data-tone='1'] {
   background:
     linear-gradient(160deg, rgb(var(--coral-rgb) / 0.16), rgb(var(--surface-rgb)) 65%),

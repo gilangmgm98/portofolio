@@ -42,14 +42,23 @@ describe('Impact', () => {
     expect(spans[0].textContent).toBe('4')
   })
 
-  it('pins and scrubs the deck only on desktop with motion allowed', () => {
-    render(<Impact />)
+  it('pins and scrubs the deck only on desktop with motion allowed, shrinking the card and darkening it with its scrim', () => {
+    const { container } = render(<Impact />)
     const entry = matchMediaCalls.find((c) => /no-preference/.test(c.query) && /min-width: 1024px/.test(c.query))
     expect(entry).toBeDefined()
     entry!.fn()
-    expect(gsapMock.to).toHaveBeenCalledTimes(achievements.length - 1)
-    const [, vars] = (gsapMock.to as jest.Mock).mock.calls[0]
-    expect(vars).toMatchObject({ scale: 0.94, opacity: 0.55 })
-    expect(vars.scrollTrigger).toMatchObject({ scrub: true, start: 'top 75%', end: 'top 25%' })
+    const steps = achievements.length - 1
+    expect(gsapMock.to).toHaveBeenCalledTimes(steps * 2)
+    const cards = Array.from(container.querySelectorAll('[data-impact-card]'))
+    const [cardTarget, cardVars] = (gsapMock.to as jest.Mock).mock.calls[0]
+    expect(cardTarget).toBe(cards[0])
+    expect(cardVars).toMatchObject({ scale: 0.94 })
+    expect(cardVars).not.toHaveProperty('opacity') // lowering the card's own opacity made stacked cards see-through
+    const [scrimTarget, scrimVars] = (gsapMock.to as jest.Mock).mock.calls[1]
+    expect(scrimTarget).toBe(cards[0].querySelector('[data-impact-scrim]'))
+    expect(scrimVars).toMatchObject({ opacity: 0.55 })
+    for (const vars of [cardVars, scrimVars]) {
+      expect(vars.scrollTrigger).toMatchObject({ scrub: true, start: 'top 75%', end: 'top 25%' })
+    }
   })
 })
