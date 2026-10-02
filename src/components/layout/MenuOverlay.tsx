@@ -5,6 +5,8 @@ import type { CSSProperties } from 'react'
 import { menuLinks, profile } from '@/data/profile'
 import { getLenis } from '@/lib/scroll'
 import ScrollLink from '@/components/ui/ScrollLink'
+import Magnetic from '@/components/ui/Magnetic'
+import StatusClock from './StatusClock'
 
 interface MenuOverlayProps {
   open: boolean
@@ -75,33 +77,52 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
       data-open={open ? 'true' : 'false'}
       className="menu-overlay flex flex-col overflow-y-auto"
     >
-      <div className="flex items-center justify-between px-6 py-5 md:px-14">
+      <div className="flex h-16 shrink-0 items-center justify-between px-6 md:px-14">
         <span className="font-display text-xl font-bold tracking-heading">
           GM<sup className="text-xs">®</sup>
         </span>
-        <button type="button" onClick={onClose} className="btn-ghost !px-4 !py-2 text-sm">
-          Close
-        </button>
+        <StatusClock className="hidden items-center gap-6 text-sm text-ink/75 md:flex" />
+        <Magnetic>
+          <button type="button" onClick={onClose} className="flex items-center gap-3 text-sm font-semibold">
+            Close
+            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M4 4l16 16M20 4L4 20" />
+            </svg>
+          </button>
+        </Magnetic>
       </div>
+
       <nav aria-label="Sections" className="flex flex-1 items-center px-6 md:px-14">
         <ul className="w-full">
           {menuLinks.map((link, i) => (
             <li key={link.id} style={{ '--i': i } as CSSProperties} className="menu-link border-b border-hairline">
-              <ScrollLink
-                id={link.id}
-                onNavigate={onClose}
-                className="flex items-baseline gap-5 py-4 font-display text-[clamp(2.5rem,min(9vw,11svh),6rem)] font-bold leading-none tracking-display"
-              >
-                <span aria-hidden="true" className="text-sm font-medium text-muted">
+              <ScrollLink id={link.id} onNavigate={onClose} className="menu-item flex items-end gap-6 py-3 md:gap-10">
+                <span
+                  aria-hidden="true"
+                  className="mb-3 w-8 shrink-0 font-sans text-sm font-medium tabular-nums tracking-normal text-muted md:mb-5"
+                >
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                {link.label}
+                <span
+                  data-text={link.label}
+                  className="grad-wipe font-display text-[clamp(2.5rem,min(9vw,11svh),6rem)] font-bold leading-[1.05] tracking-display"
+                >
+                  {link.label}
+                </span>
               </ScrollLink>
             </li>
           ))}
         </ul>
       </nav>
-      <p className="px-6 py-5 text-sm text-muted md:px-14">{profile.email}</p>
+
+      <div className="flex shrink-0 flex-wrap gap-x-10 gap-y-2 px-6 py-6 text-sm text-muted md:px-14">
+        <a href={`mailto:${profile.email}`} data-cursor className="transition-colors duration-150 hover:text-ink">
+          {profile.email}
+        </a>
+        <span>
+          {profile.city}, {profile.country}
+        </span>
+      </div>
     </div>
   )
 }

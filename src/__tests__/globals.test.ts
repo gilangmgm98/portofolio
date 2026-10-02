@@ -39,4 +39,17 @@ describe('globals.css', () => {
     expect(css).toMatch(/\.impact-card\[data-tone='0'\]\s*\{[^}]*\),\s*rgb\(var\(--surface-rgb\)\);/)
     expect(css).toMatch(/\.impact-card\[data-tone='1'\]\s*\{[^}]*\),\s*rgb\(var\(--surface-rgb\)\);/)
   })
+  it('keeps the top bar transparent over the hero and solid only once scrolled', () => {
+    expect(css).toMatch(/\.topbar\s*\{[^}]*background:\s*transparent/)
+    expect(css).toMatch(/\.topbar\[data-scrolled\]\s*\{[^}]*background:/)
+  })
+  it('wipes a gradient over hovered menu text with clip-path (not a colour swap), hover-gated', () => {
+    expect(css).toMatch(/\.grad-wipe::after\s*\{[^}]*clip-path:\s*inset\(0 100% 0 0\)/)
+    expect(css).toMatch(/@media \(hover: hover\)\s*\{[^}]*\.menu-item:hover \.grad-wipe::after\s*\{[^}]*clip-path:\s*inset\(0\)/)
+  })
+  it('breathes the green availability dot: 2s opacity pulse with a glow, off under Reduce Motion', () => {
+    expect(css).toMatch(/\.status-dot\s*\{[^}]*box-shadow:[^;]*#3ee08f[^;]*;[^}]*animation:\s*breathe 2s ease-in-out infinite/)
+    expect(css).toMatch(/@keyframes breathe\s*\{[^}]*50%\s*\{[^}]*opacity:\s*0\.35/)
+    expect(css).toMatch(/@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*\.status-dot\s*\{[^}]*animation:\s*none/)
+  })
 })

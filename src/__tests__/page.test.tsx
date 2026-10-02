@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import Page from '@/app/page'
 
 describe('Page', () => {
@@ -27,7 +27,7 @@ describe('Page', () => {
   it('contains the approved copy', () => {
     render(<Page />)
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('I build backends millions of people rely on.')
-    expect(screen.getByText('Available for work')).toBeInTheDocument()
+    expect(within(screen.getByRole('banner')).getByText('Available for work')).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 2, name: "Let's talk" })).toBeInTheDocument()
   })
 

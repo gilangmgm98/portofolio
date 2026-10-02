@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type Lenis from 'lenis'
 import MenuOverlay from '@/components/layout/MenuOverlay'
@@ -20,7 +20,7 @@ describe('MenuOverlay', () => {
 
   it('lists every menu link in order, numbered', () => {
     setup()
-    const links = screen.getAllByRole('link')
+    const links = within(screen.getByRole('navigation', { name: 'Sections' })).getAllByRole('link')
     expect(links.map((l) => l.textContent)).toEqual(['01About', '02Impact', '03Experience', '04Projects', '05Stack', '06Contact'])
     expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '#projects')
   })
@@ -92,7 +92,7 @@ describe('MenuOverlay', () => {
   it('scrolls internally and scales its links to the viewport height (short screens must not clip it)', () => {
     setup()
     expect(screen.getByRole('dialog', { name: 'Site menu' })).toHaveClass('overflow-y-auto')
-    expect(screen.getByRole('link', { name: 'Projects' }).className).toContain('11svh')
+    expect(screen.getByRole('link', { name: 'Projects' }).querySelector('.grad-wipe')?.className).toContain('11svh')
   })
 
   it('pulls focus back into the dialog when it has escaped (e.g. after clicking the backdrop)', async () => {
@@ -105,5 +105,36 @@ describe('MenuOverlay', () => {
     await user.tab()
     expect(document.activeElement).not.toBe(document.getElementById('outside'))
     expect(screen.getByRole('dialog', { name: 'Site menu' })).toContainElement(document.activeElement as HTMLElement)
+  })
+
+  it('has its own header like the top bar: logo, status with the Jakarta clock, and Close with an icon', () => {
+    setup()
+    const dialog = screen.getByRole('dialog', { name: 'Site menu' })
+    expect(within(dialog).getByText('Available for work')).toBeInTheDocument()
+    expect(within(dialog).getByText('Jakarta')).toBeInTheDocument()
+    const close = within(dialog).getByRole('button', { name: 'Close' })
+    expect(close.querySelector('svg')).not.toBeNull()
+  })
+
+  it('numbers the rows with the body font — display-font tracking made "01" collapse into one glyph', () => {
+    setup()
+    const number = screen.getByText('01')
+    expect(number).toHaveClass('font-sans', 'tabular-nums')
+    expect(number.className).not.toMatch(/tracking-display|font-display/)
+  })
+
+  it('gives every row text a gradient wipe layer (hover colour animation) via data-text', () => {
+    setup()
+    for (const label of ['About', 'Impact', 'Experience', 'Projects', 'Stack', 'Contact']) {
+      const el = screen.getByRole('link', { name: label }).querySelector('.grad-wipe')
+      expect(el).toHaveAttribute('data-text', label)
+    }
+  })
+
+  it('ends with the email and location', () => {
+    setup()
+    const dialog = screen.getByRole('dialog', { name: 'Site menu' })
+    expect(within(dialog).getByText('gilangmgm98@gmail.com')).toBeInTheDocument()
+    expect(within(dialog).getByText('Jakarta, Indonesia')).toBeInTheDocument()
   })
 })

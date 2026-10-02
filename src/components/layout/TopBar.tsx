@@ -1,33 +1,35 @@
 'use client'
 
-import { useCallback, useState } from 'react'
-import { profile } from '@/data/profile'
-import { useJakartaTime } from '@/lib/useJakartaTime'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import ScrollLink from '@/components/ui/ScrollLink'
 import Magnetic from '@/components/ui/Magnetic'
+import StatusClock from './StatusClock'
 import MenuOverlay from './MenuOverlay'
 
 export default function TopBar() {
   const [open, setOpen] = useState(false)
-  const time = useJakartaTime()
+  const barRef = useRef<HTMLElement>(null)
   const close = useCallback(() => setOpen(false), [])
+
+  // Transparent over the hero, solid once the page has scrolled. A data attribute (not React state)
+  // so the markup is identical for everyone and nothing re-renders on scroll.
+  useEffect(() => {
+    const bar = barRef.current
+    if (!bar) return
+    const update = () => bar.toggleAttribute('data-scrolled', window.scrollY > 24)
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    return () => window.removeEventListener('scroll', update)
+  }, [])
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-hairline bg-night/90">
+      <header ref={barRef} className="topbar fixed inset-x-0 top-0 z-40">
         <div className="flex h-16 items-center justify-between px-6 md:px-14">
           <ScrollLink id="top" aria-label="Back to top" className="font-display text-xl font-bold tracking-heading">
             GM<sup className="text-xs">®</sup>
           </ScrollLink>
-          <p data-reveal="fade" className="hidden items-center gap-6 text-sm text-ink/75 md:flex">
-            <span className="flex items-center gap-2">
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              {profile.status}
-            </span>
-            <span>
-              {profile.city} <time className="inline-block min-w-[3.2ch] tabular-nums">{time}</time>
-            </span>
-          </p>
+          <StatusClock data-reveal="fade" className="hidden items-center gap-6 text-sm text-ink/75 md:flex" />
           <Magnetic>
             <button
               type="button"
