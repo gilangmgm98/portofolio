@@ -113,15 +113,3 @@ body {
       radial-gradient(40% 40% at 90% 90%, rgb(var(--primary-rgb) / 0.08), transparent 70%);
   }
 }
-
-@layer utilities {
-  /* legacy — removed in Task 10 */
-  .text-gradient-cosmos {
-    background: linear-gradient(135deg, #7c3aed, #06b6d4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .glow-primary { box-shadow: 0 0 20px rgba(124, 58, 237, 0.4); }
-  .glow-accent { box-shadow: 0 0 20px rgba(6, 182, 212, 0.4); }
-}
