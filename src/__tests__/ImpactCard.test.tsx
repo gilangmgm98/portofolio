@@ -48,4 +48,9 @@ describe('ImpactCard', () => {
     expect(card.querySelector('[data-impact-scrim]')).toHaveAttribute('aria-hidden', 'true')
     expect(card).toHaveClass('relative') // anchors the scrim below lg, where the card is not sticky
   })
+
+  it('adds no trailing gap after the last card (the section padding already spaces what follows)', () => {
+    const { container } = render(<ImpactCard stat={{ value: 1, suffix: '', label: 'x' }} index={0} total={1} />)
+    expect(container.firstChild).toHaveClass('lg:last:mb-0')
+  })
 })

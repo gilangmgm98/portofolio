@@ -55,7 +55,7 @@ export default function Impact() {
 
   return (
     <Section id="impact" label="Impact">
-      <div ref={deck} className="pb-[8vh]">
+      <div ref={deck}>
         {achievements.map((stat, i) => (
           <ImpactCard key={stat.label} stat={stat} index={i} total={achievements.length} />
         ))}

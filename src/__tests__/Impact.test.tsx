@@ -61,4 +61,9 @@ describe('Impact', () => {
       expect(vars.scrollTrigger).toMatchObject({ scrub: true, start: 'top 75%', end: 'top 25%' })
     }
   })
+
+  it('keeps no extra bottom padding under the deck', () => {
+    const { container } = render(<Impact />)
+    expect(container.querySelector('[data-impact-card]')!.parentElement!.className).not.toMatch(/pb-/)
+  })
 })
