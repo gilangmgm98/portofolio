@@ -5,9 +5,12 @@ import * as THREE from 'three'
 
 interface StarFieldProps {
   particleCount?: number
+  opacity?: number
+  speed?: number
+  animated?: boolean
 }
 
-export default function StarField({ particleCount = 2000 }: StarFieldProps) {
+export default function StarField({ particleCount = 2000, opacity = 0.35, speed = 0.5, animated = true }: StarFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -22,7 +25,6 @@ export default function StarField({ particleCount = 2000 }: StarFieldProps) {
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
     camera.position.z = 5
 
-    // Build particle geometry
     const positions = new Float32Array(particleCount * 3)
     for (let i = 0; i < particleCount * 3; i++) {
       positions[i] = (Math.random() - 0.5) * 20
@@ -30,42 +32,40 @@ export default function StarField({ particleCount = 2000 }: StarFieldProps) {
     const geometry = new THREE.BufferGeometry()
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
 
-    const material = new THREE.PointsMaterial({
-      color: 0xa78bfa,
-      size: 0.02,
-      transparent: true,
-      opacity: 0.8,
-    })
+    const material = new THREE.PointsMaterial({ color: 0xa78bfa, size: 0.02, transparent: true, opacity })
 
     const stars = new THREE.Points(geometry, material)
     scene.add(stars)
 
-    // Mouse parallax
     let mouseX = 0
     let mouseY = 0
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5
       mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5
     }
-    window.addEventListener('mousemove', handleMouseMove)
 
-    // Resize
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight
       camera.updateProjectionMatrix()
       renderer.setSize(window.innerWidth, window.innerHeight)
+      if (!animated) renderer.render(scene, camera)
     }
     window.addEventListener('resize', handleResize)
 
-    // Animation loop
-    let animId: number
-    const animate = () => {
-      animId = requestAnimationFrame(animate)
-      stars.rotation.x += 0.0002 + mouseY * 0.001
-      stars.rotation.y += 0.0003 + mouseX * 0.001
+    let animId = 0
+    if (animated) {
+      window.addEventListener('mousemove', handleMouseMove)
+      const tick = () => {
+        animId = requestAnimationFrame(tick)
+        if (document.hidden) return
+        stars.rotation.x += (0.0002 + mouseY * 0.001) * speed
+        stars.rotation.y += (0.0003 + mouseX * 0.001) * speed
+        renderer.render(scene, camera)
+      }
+      tick()
+    } else {
       renderer.render(scene, camera)
     }
-    animate()
 
     return () => {
       cancelAnimationFrame(animId)
@@ -76,13 +76,7 @@ export default function StarField({ particleCount = 2000 }: StarFieldProps) {
       material.dispose()
       renderer.dispose()
     }
-  }, [particleCount])
+  }, [particleCount, opacity, speed, animated])
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0 }}
-    />
-  )
+  return <canvas ref={canvasRef} className="h-full w-full" />
 }

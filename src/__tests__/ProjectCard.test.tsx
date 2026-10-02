@@ -45,4 +45,9 @@ describe('ProjectCard', () => {
     const link = screen.getByRole('link', { name: /live/i })
     expect(link).toHaveAttribute('href', 'https://side.vercel.app')
   })
+  it('has no 3D tilt style', () => {
+    const { container } = render(<ProjectCard project={workProject} />)
+    const card = container.firstChild as HTMLElement
+    expect(card.style.transformStyle).toBe('')
+  })
 })

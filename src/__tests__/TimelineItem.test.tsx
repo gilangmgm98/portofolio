@@ -34,4 +34,8 @@ describe('TimelineItem', () => {
     render(<TimelineItem experience={mockExperience} position="right" />)
     expect(screen.getByText('Current')).toBeInTheDocument()
   })
+  it('uses no neon glow on the timeline dot or card', () => {
+    const { container } = render(<TimelineItem experience={mockExperience} position="right" />)
+    expect(container.querySelector('[class*="glow-"]')).toBeNull()
+  })
 })

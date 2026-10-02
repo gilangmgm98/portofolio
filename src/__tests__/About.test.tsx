@@ -20,4 +20,10 @@ describe('About', () => {
     const link = screen.getByRole('link', { name: /github/i })
     expect(link).toHaveAttribute('href', 'https://github.com/gilangmgm98')
   })
+  it('never uses a fixed screen height (tall content must not clip)', () => {
+    const { container } = render(<About />)
+    const section = container.querySelector('section')!
+    expect(section).toHaveClass('portfolio-section', 'min-h-screen')
+    expect(section.className).not.toMatch(/(^|\s)(md:)?h-screen/)
+  })
 })

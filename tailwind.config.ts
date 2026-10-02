@@ -2,26 +2,25 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       colors: {
         cosmos: {
-          bg: '#0a0a0f',
-          surface: '#111118',
-          primary: '#7c3aed',
-          accent: '#06b6d4',
-          text: '#f8fafc',
-          muted: '#6b7280',
-          border: '#1f2937',
+          bg: 'rgb(var(--bg-rgb) / <alpha-value>)',
+          surface: 'rgb(var(--surface-rgb) / <alpha-value>)',
+          primary: 'rgb(var(--primary-rgb) / <alpha-value>)',
+          text: 'rgb(var(--text-rgb) / <alpha-value>)',
+          muted: 'rgb(var(--muted-rgb) / <alpha-value>)',
+          border: 'var(--border)', // fixed alpha: do not use /opacity modifiers on this token
         },
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)'],
+        sans: ['var(--font-display)'],
         mono: ['var(--font-geist-mono)'],
       },
-      backgroundImage: {
-        'gradient-cosmos': 'linear-gradient(135deg, #7c3aed, #06b6d4)',
-      },
+      letterSpacing: { display: '-0.03em', heading: '-0.02em' },
+      lineHeight: { display: '1.05', heading: '1.1', body: '1.5' },
     },
   },
   plugins: [],
