@@ -10,7 +10,7 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
   useEffect(() => {
     const mm = gsap.matchMedia()
     mm.add(`${MOTION_OK} and ${FINE_POINTER}`, () => {
-      const lenis = new Lenis({ autoRaf: false, smoothWheel: true, syncTouch: false, lerp: 0.1 })
+      const lenis = new Lenis({ autoRaf: false, smoothWheel: true, syncTouch: false, lerp: 0.085 })
       setLenis(lenis)
       const off = lenis.on('scroll', ScrollTrigger.update)
       const tick = (time: number) => lenis.raf(time * 1000)

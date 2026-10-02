@@ -67,4 +67,14 @@ describe('MaskTitle', () => {
     // data-ready cancels the CSS failsafe, so it must not stay set when we could not take over
     expect(screen.getByRole('heading')).not.toHaveAttribute('data-ready')
   })
+
+  it('can mask-reveal a paragraph with its own delay and a gentler stagger', () => {
+    render(<MaskTitle as="p" trigger="load" delay={0.5} stagger={0.05}>Some intro text</MaskTitle>)
+    expect(screen.getByText('Some intro text').tagName).toBe('P')
+    matchMediaCalls.find((c) => c.query === MOTION_OK)!.fn()
+    const vars = (SplitTextMock.create as jest.Mock).mock.calls[0][1]
+    vars.onSplit({ lines: [document.createElement('span')] })
+    const [, tween] = (gsapMock.from as jest.Mock).mock.calls[0]
+    expect(tween).toMatchObject({ delay: 0.65, stagger: 0.05 })
+  })
 })

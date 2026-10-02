@@ -34,4 +34,11 @@ describe('About', () => {
     const { container } = render(<About />)
     expect((container.firstChild as HTMLElement).className).not.toMatch(/(^|\s)(md:)?h-screen/)
   })
+
+  it('keeps the bio as plain visible text (the word-by-word highlight is added by JS only)', () => {
+    const { container } = render(<About />)
+    const bio = screen.getByText(/Backend developer with/).closest('p') as HTMLElement
+    expect(bio).not.toHaveAttribute('data-reveal')
+    expect(container.querySelector('p[style]')).toBeNull()
+  })
 })

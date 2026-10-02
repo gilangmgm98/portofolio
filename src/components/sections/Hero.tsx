@@ -29,9 +29,15 @@ export default function Hero() {
       </MaskTitle>
 
       <div className="flex items-end justify-between gap-8">
-        <p data-reveal="fade" className="max-w-md text-sm leading-body text-ink/75 md:text-base">
+        <MaskTitle
+          as="p"
+          trigger="load"
+          delay={0.5}
+          stagger={0.06}
+          className="max-w-md text-sm leading-body text-ink/75 md:text-base"
+        >
           {profile.intro}
-        </p>
+        </MaskTitle>
         <ScrollLink
           id="about"
           data-reveal="fade"

@@ -10,18 +10,18 @@ export default function Contact() {
       aria-label="Contact"
       className="relative flex min-h-svh flex-col items-center justify-center px-6 py-28 text-center md:px-14"
     >
-      <p data-reveal="fade" className="text-base text-ink/75 md:text-lg">
+      <MaskTitle as="p" className="text-base text-ink/75 md:text-lg">
         Have a backend project or role in mind?
-      </p>
+      </MaskTitle>
       <MaskTitle
         as="h2"
         className="my-8 font-display text-[clamp(3rem,12.5vw,12rem)] font-extrabold leading-[0.9] tracking-display text-ink"
       >
         Let&apos;s talk
       </MaskTitle>
-      <p data-reveal="fade" className="max-w-xl text-sm leading-body text-ink/75 md:text-base">
+      <MaskTitle as="p" delay={0.2} stagger={0.06} className="max-w-xl text-sm leading-body text-ink/75 md:text-base">
         Open to backend roles and interesting projects. Email me or send a message below.
-      </p>
+      </MaskTitle>
       <div data-reveal="fade" className="mt-10 flex flex-wrap items-center justify-center gap-3">
         <a
           href={`mailto:${profile.email}`}

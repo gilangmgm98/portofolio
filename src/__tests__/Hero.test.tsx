@@ -33,6 +33,8 @@ describe('Hero', () => {
     const { container } = render(<Hero />)
     expect(container.querySelector('[style]')).toBeNull()
     expect(screen.getByRole('heading', { level: 1 })).toHaveAttribute('data-reveal', 'mask')
-    expect(container.querySelectorAll('[data-reveal="fade"]').length).toBeGreaterThanOrEqual(3)
+    expect(container.querySelectorAll('[data-reveal="fade"]').length).toBeGreaterThanOrEqual(2)
+    // the intro paragraph reveals line by line, like the headline
+    expect(screen.getByText(profile.intro)).toHaveAttribute('data-reveal', 'mask')
   })
 })

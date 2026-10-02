@@ -9,6 +9,12 @@ describe('Contact', () => {
     expect(screen.getByRole('heading', { level: 2, name: "Let's talk" })).toBeInTheDocument()
   })
 
+  it('reveals the intro paragraphs line by line', () => {
+    render(<Contact />)
+    expect(screen.getByText('Have a backend project or role in mind?')).toHaveAttribute('data-reveal', 'mask')
+    expect(screen.getByText(/Open to backend roles/)).toHaveAttribute('data-reveal', 'mask')
+  })
+
   it('renders the email link and the Copy button', () => {
     render(<Contact />)
     expect(screen.getByRole('link', { name: 'gilangmgm98@gmail.com' })).toHaveAttribute('href', 'mailto:gilangmgm98@gmail.com')

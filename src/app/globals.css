@@ -43,7 +43,7 @@ body {
 /* ---------- Editorial: reveal gating (markup is identical for everyone) ---------- */
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(32px);
   animation: reveal-failsafe 0s linear 3s forwards;
 }
 .js [data-reveal='fade'],

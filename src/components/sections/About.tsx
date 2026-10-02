@@ -1,5 +1,6 @@
 import { profile, socialLinks } from '@/data/profile'
 import Section from '@/components/ui/Section'
+import ScrubText from '@/components/ui/ScrubText'
 
 const aboutLinks = socialLinks.filter((l) => l.label !== 'Instagram')
 const termClass = 'text-[12.5px] font-bold uppercase tracking-[0.16em] text-muted'
@@ -15,23 +16,23 @@ export default function About() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/foto.png" alt="Muhammad Gilang Murdiyanto" className="h-full w-full object-cover" />
         </div>
-        <div data-reveal className="space-y-5 text-[15px] leading-body text-ink/75 md:text-base">
-          <p>
+        <div className="space-y-5 text-[15px] leading-body text-ink/75 md:text-base">
+          <ScrubText>
             Backend developer with <span className="font-semibold text-ink">4+ years</span> across IT
             support and software engineering, shipping production systems used by millions. Currently at CODE.ID
             owning the REST APIs powering <span className="font-semibold text-ink">MyTelkomsel</span> —
             one of Indonesia&apos;s largest telco super apps — with full responsibility over reliability, API
             contracts, and performance. Delivered the last{' '}
             <span className="font-semibold text-ink">2 sprints with zero backend defects</span>.
-          </p>
-          <p>
+          </ScrubText>
+          <ScrubText>
             Previously cut data processing time by{' '}
             <span className="font-semibold text-ink">~20%</span> through ORM profiling and query
             optimization, and engineered a centralized platform integrating 4 communication channels including
             Asterisk PBX and WhatsApp Business API. Beyond application code, I run and maintain a self-hosted
             infrastructure stack — Proxmox virtualization, containerized services, zero-trust networking —
             because understanding what my code runs on makes me a better engineer, not just a better coder.
-          </p>
+          </ScrubText>
         </div>
       </div>
 

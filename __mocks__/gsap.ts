@@ -46,7 +46,7 @@ export const ScrollTrigger = {
 }
 
 export const SplitText = {
-  create: jest.fn(() => ({ lines: [] as Element[], revert: jest.fn() })),
+  create: jest.fn(() => ({ lines: [] as Element[], words: [] as Element[], revert: jest.fn() })),
 }
 
 // Runs the callback after mount like the real hook (refs are set); GSAP work itself is mocked.

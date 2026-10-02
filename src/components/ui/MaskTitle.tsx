@@ -1,19 +1,32 @@
 'use client'
 
 import { useRef } from 'react'
+import type { ElementType } from 'react'
 import { gsap, SplitText, useGSAP, MOTION_OK } from '@/lib/gsap'
 
 interface MaskTitleProps {
-  as?: 'h1' | 'h2'
+  as?: 'h1' | 'h2' | 'p' | 'div'
   trigger?: 'load' | 'scroll'
+  /** extra delay (s) on top of the base one; useful to sequence a paragraph after its heading */
+  delay?: number
+  /** stagger (s) between lines; headings use the default, paragraphs read better with less */
+  stagger?: number
   className?: string
   children: React.ReactNode
 }
 
-// Heading whose lines slide up from behind a mask. The markup never depends on the motion
+// Text whose lines slide up from behind a mask. The markup never depends on the motion
 // preference: CSS hides it only under `.js`, and JS takes over (data-ready) only when motion is allowed.
-export default function MaskTitle({ as: Tag = 'h2', trigger = 'scroll', className, children }: MaskTitleProps) {
-  const ref = useRef<HTMLHeadingElement>(null)
+export default function MaskTitle({
+  as = 'h2',
+  trigger = 'scroll',
+  delay = 0,
+  stagger = 0.08,
+  className,
+  children,
+}: MaskTitleProps) {
+  const Tag = as as ElementType
+  const ref = useRef<HTMLElement>(null)
 
   useGSAP(() => {
     const mm = gsap.matchMedia()
@@ -33,20 +46,20 @@ export default function MaskTitle({ as: Tag = 'h2', trigger = 'scroll', classNam
               yPercent: 110,
               duration: 1.1,
               ease: 'expo.out',
-              stagger: 0.08,
-              delay: trigger === 'load' ? 0.15 : 0,
+              stagger,
+              delay: (trigger === 'load' ? 0.15 : 0) + delay,
               scrollTrigger: trigger === 'scroll' ? { trigger: el, start: 'top 88%', once: true } : undefined,
             })
           },
         })
       } catch {
-        // could not take over: give the title back to the CSS failsafe instead of leaving it hidden
+        // could not take over: give the text back to the CSS failsafe instead of leaving it hidden
         el.removeAttribute('data-ready')
         return
       }
       return () => split.revert()
     })
-  }, [trigger])
+  }, [trigger, delay, stagger])
 
   return (
     <Tag ref={ref} data-reveal="mask" className={className}>

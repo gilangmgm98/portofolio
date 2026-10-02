@@ -40,6 +40,6 @@ describe('Reveals', () => {
     const vars = (ScrollTriggerMock.batch as jest.Mock).mock.calls[0][1]
     const els = [document.getElementById('a')]
     vars.onEnter(els)
-    expect(gsapMock.to).toHaveBeenCalledWith(els, expect.objectContaining({ opacity: 1, y: 0, stagger: 0.06 }))
+    expect(gsapMock.to).toHaveBeenCalledWith(els, expect.objectContaining({ opacity: 1, y: 0, stagger: 0.08, duration: 0.9, ease: 'power4.out' }))
   })
 })

@@ -14,7 +14,7 @@ export default function Reveals() {
         start: 'top 88%',
         once: true,
         onEnter: (els) =>
-          gsap.to(els, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.06, overwrite: true }),
+          gsap.to(els, { opacity: 1, y: 0, duration: 0.9, ease: 'power4.out', stagger: 0.08, overwrite: true }),
       })
       const refresh = () => ScrollTrigger.refresh()
       document.fonts?.ready.then(refresh)

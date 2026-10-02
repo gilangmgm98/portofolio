@@ -27,7 +27,7 @@ describe('LenisProvider', () => {
 
     expect(Lenis.instances).toHaveLength(1)
     const lenis = Lenis.instances[0]
-    expect(lenis.options).toMatchObject({ autoRaf: false, syncTouch: false, smoothWheel: true })
+    expect(lenis.options).toMatchObject({ autoRaf: false, syncTouch: false, smoothWheel: true, lerp: 0.085 })
     expect(getLenis()).toBe(lenis)
     expect(lenis.on).toHaveBeenCalledWith('scroll', ScrollTriggerMock.update)
     expect(gsapMock.ticker.add).toHaveBeenCalledTimes(1)
