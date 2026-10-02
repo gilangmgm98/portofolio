@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { Syne, Manrope, Instrument_Serif } from 'next/font/google'
 import './globals.css'
 import 'lenis/dist/lenis.css'
-import MotionProvider from '@/components/motion/MotionProvider'
-import Backdrop from '@/components/layout/Backdrop'
 
 const syne = Syne({ variable: '--font-syne', subsets: ['latin'], display: 'swap' })
 const manrope = Manrope({ variable: '--font-manrope', subsets: ['latin'], display: 'swap' })
@@ -40,12 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Enables the CSS reveal gating; if JS never runs, content stays visible (see globals.css) */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body className="text-ink antialiased">
-        <MotionProvider>
-          <Backdrop />
-          {children}
-        </MotionProvider>
-      </body>
+      <body className="text-ink antialiased">{children}</body>
     </html>
   )
 }

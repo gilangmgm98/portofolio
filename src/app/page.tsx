@@ -1,24 +1,45 @@
-import PageShell from '@/components/layout/PageShell'
+import LenisProvider from '@/components/layout/LenisProvider'
+import Aurora from '@/components/layout/Aurora'
+import TopBar from '@/components/layout/TopBar'
+import SplitLayout from '@/components/layout/SplitLayout'
+import Footer from '@/components/layout/Footer'
+import Reveals from '@/components/layout/Reveals'
+import Cursor from '@/components/layout/Cursor'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
-import Skills from '@/components/sections/Skills'
+import Impact from '@/components/sections/Impact'
 import Experience from '@/components/sections/Experience'
 import Projects from '@/components/sections/Projects'
-import Achievements from '@/components/sections/Achievements'
+import Stack from '@/components/sections/Stack'
 import Contact from '@/components/sections/Contact'
-
-const SECTION_COUNT = 7
 
 export default function Page() {
   return (
-    <PageShell sectionCount={SECTION_COUNT}>
-      <Hero />
-      <About />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Achievements />
-      <Contact />
-    </PageShell>
+    <LenisProvider>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-night"
+      >
+        Skip to content
+      </a>
+      <Aurora />
+      <TopBar />
+      <div id="site-content">
+        <main id="main">
+          <Hero />
+          <SplitLayout>
+            <About />
+            <Impact />
+            <Experience />
+            <Projects />
+            <Stack />
+          </SplitLayout>
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+      <Reveals />
+      <Cursor />
+    </LenisProvider>
   )
 }
