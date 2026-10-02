@@ -341,3 +341,14 @@ html[data-menu-open] {
     transition: none;
   }
 }
+
+/* ---------- Editorial: impact cards ---------- */
+.impact-card {
+  background: rgb(var(--surface-rgb));
+}
+.impact-card[data-tone='0'] {
+  background: linear-gradient(160deg, rgb(var(--primary-rgb) / 0.22), rgb(var(--surface-rgb)) 65%);
+}
+.impact-card[data-tone='1'] {
+  background: linear-gradient(160deg, rgb(var(--coral-rgb) / 0.16), rgb(var(--surface-rgb)) 65%);
+}
