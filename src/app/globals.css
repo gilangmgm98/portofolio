@@ -193,3 +193,44 @@ body {
       var(--grad) border-box;
   }
 }
+
+/* ---------- Editorial: custom cursor (mouse only) ---------- */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 9999px;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: rgb(var(--text-rgb));
+}
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgb(var(--text-rgb) / 0.5);
+  transition:
+    scale 250ms var(--ease-out),
+    background-color 250ms var(--ease-out),
+    border-color 250ms var(--ease-out);
+}
+.cursor-ring[data-hover='true'] {
+  scale: 1.8;
+  background: rgb(var(--primary-rgb) / 0.15);
+  border-color: rgb(var(--primary-rgb));
+}
+html.has-cursor .cursor-dot,
+html.has-cursor .cursor-ring {
+  opacity: 1;
+}
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button,
+html.has-cursor [data-cursor] {
+  cursor: none;
+}
