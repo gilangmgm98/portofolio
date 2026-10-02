@@ -11,21 +11,21 @@ describe('motion tokens', () => {
 })
 
 describe('revealStates', () => {
-  it('translates 24px up using a full transform string when motion is allowed', () => {
-    const { hidden, shown } = revealStates(false)
+  it('is the same for every user so server HTML and hydrated markup always match', () => {
+    const { hidden, shown } = revealStates()
     expect(hidden).toEqual({ opacity: 0, transform: 'translateY(24px)' })
     expect(shown).toEqual({ opacity: 1, transform: 'translateY(0px)' })
-  })
-  it('only fades when reduced motion is requested', () => {
-    const { hidden, shown } = revealStates(true)
-    expect(hidden).toEqual({ opacity: 0 })
-    expect(shown).toEqual({ opacity: 1 })
   })
 })
 
 describe('transitionFor', () => {
-  it('is 600ms ease-out normally and 200ms when reduced', () => {
+  it('is 600ms ease-out normally', () => {
     expect(transitionFor(false)).toEqual({ duration: 0.6, ease: EASE_OUT })
-    expect(transitionFor(true)).toEqual({ duration: 0.2, ease: EASE_OUT })
+  })
+  it('under reduced motion fades over 200ms and snaps every other property instantly', () => {
+    expect(transitionFor(true)).toEqual({
+      default: { duration: 0 },
+      opacity: { duration: 0.2, ease: EASE_OUT },
+    })
   })
 })
