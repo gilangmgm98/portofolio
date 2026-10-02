@@ -1,5 +1,9 @@
 'use client'
 
+import { m } from 'motion/react'
+import { SPRING } from '@/lib/motion'
+import { scrollToSection } from '@/lib/scroll'
+
 interface NavbarProps {
   activeSection: number
 }
@@ -14,38 +18,44 @@ const NAV_LINKS = [
 ]
 
 export default function Navbar({ activeSection }: NavbarProps) {
-  const scrollToSection = (index: number) => {
-    const sections = document.querySelectorAll('.portfolio-section')
-    sections[index]?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-500 ${
-        activeSection === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      aria-label="Primary"
+      className={`fixed left-0 right-0 top-0 z-50 transition-opacity duration-300 ${
+        activeSection === 0 ? 'pointer-events-none opacity-0' : 'opacity-100'
       }`}
     >
-      <div className="flex items-center justify-between px-8 py-4 backdrop-blur-md border-b border-cosmos-border/30">
+      <div aria-hidden="true" className="nav-edge absolute inset-0 -z-10" />
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <button
           onClick={() => scrollToSection(0)}
-          className="text-cosmos-primary font-black text-xl tracking-wider"
+          className="text-lg font-semibold tracking-heading text-cosmos-text"
         >
           MGM
         </button>
-        <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.label}
-              onClick={() => scrollToSection(link.index)}
-              className={`text-sm tracking-widest uppercase transition-colors duration-200 ${
-                activeSection === link.index
-                  ? 'text-cosmos-primary'
-                  : 'text-cosmos-muted hover:text-cosmos-text'
-              }`}
-            >
-              {link.label}
-            </button>
-          ))}
+        <div className="hidden items-center gap-1 md:flex">
+          {NAV_LINKS.map((link) => {
+            const active = activeSection === link.index
+            return (
+              <button
+                key={link.label}
+                onClick={() => scrollToSection(link.index)}
+                aria-current={active ? 'true' : undefined}
+                className={`relative rounded-full px-3 py-1.5 text-sm transition-colors duration-150 ${
+                  active ? 'text-cosmos-text' : 'text-cosmos-muted hover:text-cosmos-text'
+                }`}
+              >
+                {active && (
+                  <m.span
+                    layoutId="nav-pill"
+                    transition={SPRING}
+                    className="absolute inset-0 rounded-full bg-cosmos-text/10"
+                  />
+                )}
+                <span className="relative">{link.label}</span>
+              </button>
+            )
+          })}
         </div>
       </div>
     </nav>

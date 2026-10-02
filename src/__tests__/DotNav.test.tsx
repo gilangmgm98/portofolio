@@ -25,4 +25,11 @@ describe('DotNav', () => {
     expect(dots[2]).toHaveClass('bg-cosmos-primary')
     expect(dots[0]).not.toHaveClass('bg-cosmos-primary')
   })
+
+  it('marks only the active dot with aria-current', () => {
+    const { container } = render(<DotNav total={7} active={2} onNavigate={jest.fn()} />)
+    const dots = container.querySelectorAll('button')
+    expect(dots[2]).toHaveAttribute('aria-current', 'true')
+    expect(dots[1]).not.toHaveAttribute('aria-current')
+  })
 })
