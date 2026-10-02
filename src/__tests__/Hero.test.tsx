@@ -1,41 +1,36 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import Hero from '@/components/sections/Hero'
+import { profile } from '@/data/profile'
 
 describe('Hero', () => {
-  it('renders Muhammad', () => {
+  it('is the top-of-page region', () => {
     render(<Hero />)
-    expect(screen.getByText('Muhammad')).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Introduction' })).toHaveAttribute('id', 'top')
   })
-  it('renders GILANG', () => {
+
+  it('renders the approved headline with the accent words in gradient', () => {
     render(<Hero />)
-    expect(screen.getByText('GILANG')).toBeInTheDocument()
+    const h1 = screen.getByRole('heading', { level: 1 })
+    expect(h1).toHaveTextContent('I build backends millions of people rely on.')
+    expect(screen.getByText('millions of people')).toHaveClass('text-grad', 'italic')
   })
-  it('renders MURDIYANTO', () => {
+
+  it('renders the name row, role and intro', () => {
     render(<Hero />)
-    expect(screen.getByText('MURDIYANTO')).toBeInTheDocument()
+    expect(screen.getByText('Muhammad Gilang Murdiyanto')).toBeInTheDocument()
+    expect(screen.getByText('Backend Developer · TypeScript · NestJS · Node.js')).toBeInTheDocument()
+    expect(screen.getByText(profile.intro)).toBeInTheDocument()
   })
-  it('renders Backend Developer label', () => {
+
+  it('has a scroll badge that jumps to About', () => {
     render(<Hero />)
-    expect(screen.getByText('Backend Developer')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Scroll to About' })).toHaveAttribute('href', '#about')
   })
-  it('renders View Work CTA', () => {
-    render(<Hero />)
-    expect(screen.getByText('View Work')).toBeInTheDocument()
-  })
-  it('renders Contact CTA', () => {
-    render(<Hero />)
-    expect(screen.getByText('Contact')).toBeInTheDocument()
-  })
-  it('CTAs scroll to a section', async () => {
-    const user = userEvent.setup()
-    render(
-      <>
-        <Hero />
-        {Array.from({ length: 6 }).map((_, i) => <section key={i} className="portfolio-section" />)}
-      </>
-    )
-    await user.click(screen.getByText('Contact'))
-    expect(Element.prototype.scrollIntoView).toHaveBeenCalled()
+
+  it('uses only CSS-gated reveal attributes and no inline styles', () => {
+    const { container } = render(<Hero />)
+    expect(container.querySelector('[style]')).toBeNull()
+    expect(screen.getByRole('heading', { level: 1 })).toHaveAttribute('data-reveal', 'mask')
+    expect(container.querySelectorAll('[data-reveal="fade"]').length).toBeGreaterThanOrEqual(3)
   })
 })

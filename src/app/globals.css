@@ -291,3 +291,18 @@ html[data-menu-open] {
     transform: none;
   }
 }
+
+/* ---------- Editorial: hero badge ---------- */
+.hero-badge-spin {
+  animation: badge-spin 14s linear infinite;
+}
+@keyframes badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge-spin {
+    animation: none;
+  }
+}
