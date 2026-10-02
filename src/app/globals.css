@@ -352,3 +352,59 @@ html[data-menu-open] {
 .impact-card[data-tone='1'] {
   background: linear-gradient(160deg, rgb(var(--coral-rgb) / 0.16), rgb(var(--surface-rgb)) 65%);
 }
+
+/* ---------- Editorial: orbit ---------- */
+.orbit-core {
+  position: absolute;
+  inset: 38%;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle, rgb(var(--primary-rgb) / 0.55), rgb(var(--coral-rgb) / 0.18) 55%, transparent 72%);
+  filter: blur(6px);
+}
+.orbit-ring {
+  position: absolute;
+  border: 1px dashed var(--hairline);
+  border-radius: 9999px;
+  animation: orbit-spin var(--dur) linear infinite;
+  animation-direction: var(--dir);
+}
+.orbit-pill {
+  position: absolute;
+  left: calc(50% + 50% * cos(var(--a)));
+  top: calc(50% + 50% * sin(var(--a)));
+  translate: -50% -50%;
+}
+.orbit-pill > span {
+  display: inline-block;
+  white-space: nowrap;
+  border-radius: 9999px;
+  border: 1px solid var(--hairline);
+  background: rgb(var(--surface-rgb));
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: orbit-spin var(--dur) linear infinite;
+  animation-direction: var(--dir-inv);
+}
+.orbit-pill:nth-child(4n) > span {
+  background: rgb(var(--primary-rgb) / 0.18);
+  border-color: rgb(var(--primary-rgb) / 0.4);
+}
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (hover: hover) {
+  .orbit:hover .orbit-ring,
+  .orbit:hover .orbit-pill > span {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring,
+  .orbit-pill > span {
+    animation: none;
+  }
+}
