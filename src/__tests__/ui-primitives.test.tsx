@@ -9,6 +9,12 @@ describe('GradientText', () => {
     render(<GradientText>millions</GradientText>)
     expect(screen.getByText('millions')).toHaveClass('font-accent', 'italic', 'text-grad', 'text-[1.1em]', 'tracking-[-0.02em]', 'sm:whitespace-nowrap')
   })
+
+  it('pads its box so italic overhang is painted by the gradient clip (and wrapped lines each keep the padding)', () => {
+    render(<GradientText>millions</GradientText>)
+    const em = screen.getByText('millions')
+    expect(em).toHaveClass('px-[0.14em]', '-mx-[0.14em]', '[box-decoration-break:clone]')
+  })
 })
 
 describe('Section', () => {
