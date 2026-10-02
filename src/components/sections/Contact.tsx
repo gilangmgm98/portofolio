@@ -1,90 +1,61 @@
-'use client'
-
-import { useState } from 'react'
-import { AnimatePresence, m } from 'motion/react'
-import SectionHeading from '@/components/ui/SectionHeading'
-import { RevealGroup, RevealItem } from '@/components/motion/Reveal'
-
-const FIELD =
-  'w-full rounded-2xl border border-cosmos-border bg-cosmos-surface/80 px-4 py-3 text-sm text-cosmos-text placeholder-cosmos-muted outline-none transition-colors duration-150 focus:border-cosmos-primary focus-visible:ring-2 focus-visible:ring-cosmos-primary/40'
-
-const SOCIAL = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/gilangmgm/' },
-  { label: 'GitHub', href: 'https://github.com/gilangmgm98' },
-  { label: 'Instagram', href: 'https://www.instagram.com/gilangmgm' },
-]
+import { profile, socialLinks } from '@/data/profile'
+import MaskTitle from '@/components/ui/MaskTitle'
+import Magnetic from '@/components/ui/Magnetic'
+import CopyButton from './CopyButton'
+import ContactForm from './ContactForm'
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('loading')
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      setStatus(res.ok ? 'success' : 'error')
-    } catch {
-      setStatus('error')
-    }
-  }
-
   return (
-    <section className="portfolio-section flex min-h-screen w-full items-center justify-center px-6 py-24 md:px-16">
-      <RevealGroup className="w-full max-w-2xl space-y-8 text-center">
-        <RevealItem>
-          <SectionHeading label="07 / Contact" title="Let's Build Something Together" align="center" />
-        </RevealItem>
-        <RevealItem>
+    <section
+      id="contact"
+      aria-label="Contact"
+      className="relative flex min-h-svh flex-col items-center justify-center px-6 py-28 text-center md:px-14"
+    >
+      <MaskTitle as="p" className="text-base text-ink/75 md:text-lg">
+        Have a backend project or role in mind?
+      </MaskTitle>
+      <MaskTitle
+        as="h2"
+        skew
+        className="my-8 font-display text-[clamp(3rem,12.5vw,12rem)] font-extrabold leading-[0.9] tracking-display text-ink"
+      >
+        Let&apos;s talk
+      </MaskTitle>
+      <MaskTitle as="p" delay={0.2} stagger={0.06} className="max-w-xl text-sm leading-body text-ink/75 md:text-base">
+        Open to backend roles and interesting projects. Email me or send a message below.
+      </MaskTitle>
+      <div data-reveal="fade" className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <Magnetic>
           <a
-            href="mailto:gilangmgm98@gmail.com"
-            className="inline-block text-sm text-cosmos-muted transition-colors duration-150 hover:text-cosmos-primary"
+            href={`mailto:${profile.email}`}
+            data-cursor
+            className="grad-border inline-flex items-center rounded-full px-7 py-4 text-base font-bold text-ink md:text-lg"
           >
-            gilangmgm98@gmail.com
+            {profile.email}
           </a>
-        </RevealItem>
-        <RevealItem>
-          <form onSubmit={handleSubmit} className="space-y-4 text-left">
-            <input type="text" placeholder="Your name" value={form.name} required className={FIELD}
-              onChange={(e) => setForm({ ...form, name: e.target.value })} />
-            <input type="email" placeholder="Your email" value={form.email} required className={FIELD}
-              onChange={(e) => setForm({ ...form, email: e.target.value })} />
-            <textarea placeholder="Your message" rows={4} value={form.message} required className={`${FIELD} resize-none`}
-              onChange={(e) => setForm({ ...form, message: e.target.value })} />
-            <button type="submit" disabled={status === 'loading'} className="btn-primary w-full disabled:opacity-50">
-              {status === 'loading' ? 'Sending...' : 'Send Message'}
-            </button>
-            <div className="min-h-5 text-center text-sm" aria-live="polite">
-              <AnimatePresence mode="wait">
-                {status === 'success' && (
-                  <m.p key="success" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }} className="text-cosmos-primary">
-                    Message sent! I&apos;ll get back to you soon.
-                  </m.p>
-                )}
-                {status === 'error' && (
-                  <m.p key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }} className="text-[#ff453a]">
-                    Something went wrong. Try emailing directly.
-                  </m.p>
-                )}
-              </AnimatePresence>
-            </div>
-          </form>
-        </RevealItem>
-        <RevealItem className="flex justify-center gap-6 pt-4">
-          {SOCIAL.map((link) => (
-            <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
-              className="text-xs font-medium text-cosmos-muted transition-colors duration-150 hover:text-cosmos-primary">
+        </Magnetic>
+        <Magnetic>
+          <CopyButton text={profile.email} />
+        </Magnetic>
+      </div>
+      <div data-reveal="fade" className="mt-14 w-full max-w-xl">
+        <ContactForm />
+      </div>
+      <ul data-reveal="fade" className="mt-12 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted">
+        {socialLinks.map((link) => (
+          <li key={link.label}>
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor
+              className="transition-colors duration-150 hover:text-ink"
+            >
               {link.label}
             </a>
-          ))}
-        </RevealItem>
-      </RevealGroup>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }

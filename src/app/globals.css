@@ -3,29 +3,22 @@
 @tailwind utilities;
 
 :root {
-  --bg-rgb: 0 0 0;
-  --surface-rgb: 28 28 30;
-  --text-rgb: 245 245 247;
-  --muted-rgb: 134 134 139;
+  --bg-rgb: 7 7 11;
+  --surface-rgb: 22 22 30;
+  --text-rgb: 236 235 243;
+  --muted-rgb: 141 139 156;
   --primary-rgb: 167 139 250;
-  --on-primary: #0a0a0f;
-  --border: rgba(255, 255, 255, 0.1);
-  --glass: rgba(28, 28, 30, 0.6);
-  --glass-blur: blur(20px) saturate(180%);
+  --coral-rgb: 255 138 107;
+  --on-grad: #0a0a0f;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --grad: linear-gradient(100deg, #a78bfa 0%, #ff8a6b 100%);
+  --radius-card: 28px;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --font-display: -apple-system, 'SF Pro Display', var(--font-geist-sans), system-ui, sans-serif;
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  :root {
-    --glass: #1c1c1e;
-    --glass-blur: none;
-  }
 }
 
 @media (prefers-contrast: more) {
   :root {
-    --border: rgba(255, 255, 255, 0.4);
+    --hairline: rgba(255, 255, 255, 0.4);
     --muted-rgb: 174 174 178;
   }
 }
@@ -47,69 +40,491 @@ body {
   overflow-x: hidden;
 }
 
-@layer components {
-  .glass {
-    background: var(--glass);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--border);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      0 8px 24px rgba(0, 0, 0, 0.35),
-      0 2px 6px rgba(0, 0, 0, 0.25);
+/* ---------- Editorial: reveal gating (markup is identical for everyone) ---------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  animation: reveal-failsafe 0s linear 3s forwards;
+}
+.js [data-reveal='fade'],
+.js [data-reveal='mask'] {
+  transform: none;
+}
+/* GSAP marks every reveal element data-ready when it takes over; that cancels the failsafe */
+.js [data-reveal][data-ready] {
+  animation: none;
+}
+@keyframes reveal-failsafe {
+  to {
+    opacity: 1;
+    transform: none;
   }
-
-  .nav-edge {
-    background: rgba(0, 0, 0, 0.55);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
-    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
-    mask-image: linear-gradient(to bottom, #000 60%, transparent);
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    transition:
-      transform 100ms var(--ease-out),
-      background-color 150ms var(--ease-out),
-      border-color 150ms var(--ease-out),
-      color 150ms var(--ease-out);
-  }
-  .btn-primary {
-    background: rgb(var(--primary-rgb));
-    color: var(--on-primary);
-  }
-  .btn-secondary {
-    background: transparent;
-    color: rgb(var(--text-rgb));
-    border: 1px solid var(--border);
-  }
-  .btn-primary:active,
-  .btn-secondary:active {
-    transform: scale(0.97);
-  }
-  @media (hover: hover) {
-    .btn-primary:hover {
-      background: rgb(var(--primary-rgb) / 0.85);
-    }
-    .btn-secondary:hover {
-      border-color: rgb(var(--primary-rgb) / 0.6);
-    }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
 
 @layer components {
-  .backdrop-gradient {
+  .text-grad {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .btn-grad,
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    transition:
+      transform 120ms var(--ease-out),
+      background-color 150ms var(--ease-out),
+      border-color 150ms var(--ease-out);
+  }
+  .btn-grad {
+    background: var(--grad);
+    color: var(--on-grad);
+  }
+  .btn-ghost {
+    border: 1px solid var(--hairline);
+    color: rgb(var(--text-rgb));
+  }
+  .btn-grad:active,
+  .btn-ghost:active {
+    transform: scale(0.97);
+  }
+  @media (hover: hover) {
+    .btn-ghost:hover {
+      border-color: rgb(var(--text-rgb) / 0.5);
+    }
+  }
+  .grad-border {
+    border: 1.5px solid transparent;
     background:
-      radial-gradient(60% 50% at 50% 0%, rgb(var(--primary-rgb) / 0.14), transparent 70%),
-      radial-gradient(40% 40% at 90% 90%, rgb(var(--primary-rgb) / 0.08), transparent 70%);
+      linear-gradient(rgb(var(--bg-rgb)), rgb(var(--bg-rgb))) padding-box,
+      var(--grad) border-box;
+  }
+}
+
+/* ---------- Editorial: custom cursor (mouse only) ---------- */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgb(var(--text-rgb));
+}
+/* GSAP positions .cursor-ring with inline transforms (and writes `scale: none`), so the hover
+   growth lives on the inner shape where nothing else touches scale. */
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+}
+.cursor-ring-shape {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  border: 1px solid rgb(var(--text-rgb) / 0.5);
+  transition:
+    scale 250ms var(--ease-out),
+    background-color 250ms var(--ease-out),
+    border-color 250ms var(--ease-out);
+}
+.cursor-ring[data-hover='true'] .cursor-ring-shape {
+  scale: 1.8;
+  background: rgb(var(--primary-rgb) / 0.15);
+  border-color: rgb(var(--primary-rgb));
+}
+html.has-cursor .cursor-dot,
+html.has-cursor .cursor-ring {
+  opacity: 1;
+}
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button,
+html.has-cursor [data-cursor] {
+  cursor: none;
+}
+
+/* ---------- Editorial: aurora (CSS-only, transform-only: composited, no repaint) ---------- */
+.aurora-glow {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 9999px;
+  will-change: transform;
+}
+.aurora-glow[data-i='0'] {
+  left: -15vmax;
+  top: -25vmax;
+  background: radial-gradient(circle, rgb(var(--primary-rgb) / 0.3), transparent 65%);
+  animation: aurora-drift-a 70s ease-in-out infinite alternate;
+}
+.aurora-glow[data-i='1'] {
+  right: -20vmax;
+  bottom: -30vmax;
+  background: radial-gradient(circle, rgb(var(--coral-rgb) / 0.2), transparent 65%);
+  animation: aurora-drift-b 90s ease-in-out infinite alternate;
+}
+.aurora-glow[data-i='2'] {
+  left: 25vw;
+  bottom: -40vmax;
+  background: radial-gradient(circle, rgb(120 90 255 / 0.22), transparent 65%);
+  animation: aurora-drift-c 110s ease-in-out infinite alternate;
+}
+@keyframes aurora-drift-a {
+  to {
+    transform: translate3d(22vw, 14vh, 0) scale(1.15);
+  }
+}
+@keyframes aurora-drift-b {
+  to {
+    transform: translate3d(-20vw, -12vh, 0) scale(0.9);
+  }
+}
+@keyframes aurora-drift-c {
+  to {
+    transform: translate3d(-18vw, -16vh, 0) scale(1.1);
+  }
+}
+.aurora-gl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1200ms var(--ease-out);
+}
+.aurora-gl[data-on] {
+  opacity: 1;
+}
+/* once the shader runs, fade the CSS glows out and stop their (now invisible) animations */
+.aurora[data-gl] .aurora-glow {
+  opacity: 0;
+  animation-play-state: paused;
+  transition: opacity 1200ms var(--ease-out);
+}
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .aurora-glow {
+    animation: none;
+    will-change: auto;
+  }
+}
+
+/* ---------- Editorial: menu overlay ---------- */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgb(10 11 18);
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition:
+    clip-path 500ms cubic-bezier(0.65, 0, 0.35, 1),
+    visibility 0s linear 500ms;
+}
+.menu-overlay[data-open='true'] {
+  clip-path: inset(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+.menu-link {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+  transition-delay: calc(150ms + var(--i) * 40ms);
+}
+.menu-overlay[data-open='true'] .menu-link {
+  opacity: 1;
+  transform: none;
+}
+html[data-menu-open] {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-overlay,
+  .menu-link {
+    transition: none;
+  }
+  .menu-link {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Editorial: hero badge ---------- */
+.hero-badge-spin {
+  animation: badge-spin 14s linear infinite;
+}
+@keyframes badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge-spin {
+    animation: none;
+  }
+}
+
+/* ---------- Editorial: sidebar scrollspy ---------- */
+.nav-item {
+  color: rgb(var(--muted-rgb));
+  transition: color 200ms var(--ease-out);
+}
+.nav-item::before {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+  transform-origin: left;
+  transition:
+    transform 300ms var(--ease-out),
+    opacity 300ms var(--ease-out);
+}
+.nav-item[aria-current='true'] {
+  color: rgb(var(--text-rgb));
+}
+.nav-item[aria-current='true']::before {
+  transform: scaleX(1.4);
+  opacity: 1;
+}
+@media (hover: hover) {
+  .nav-item:hover {
+    color: rgb(var(--text-rgb));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-item,
+  .nav-item::before {
+    transition: none;
+  }
+}
+
+/* ---------- Editorial: impact cards ---------- */
+.impact-card {
+  background: rgb(var(--surface-rgb));
+}
+.impact-card[data-tone='0'] {
+  background:
+    linear-gradient(160deg, rgb(var(--primary-rgb) / 0.22), rgb(var(--surface-rgb)) 65%),
+    rgb(var(--surface-rgb));
+}
+.impact-scrim {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgb(var(--bg-rgb));
+  opacity: 0;
+  pointer-events: none;
+}
+.impact-card[data-tone='1'] {
+  background:
+    linear-gradient(160deg, rgb(var(--coral-rgb) / 0.16), rgb(var(--surface-rgb)) 65%),
+    rgb(var(--surface-rgb));
+}
+
+/* ---------- Editorial: orbit ---------- */
+.orbit-core {
+  position: absolute;
+  inset: 38%;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle, rgb(var(--primary-rgb) / 0.55), rgb(var(--coral-rgb) / 0.18) 55%, transparent 72%);
+  filter: blur(6px);
+}
+.orbit-ring {
+  position: absolute;
+  border: 1px dashed var(--hairline);
+  border-radius: 9999px;
+  animation: orbit-spin var(--dur) linear infinite;
+  animation-direction: var(--dir);
+}
+.orbit-pill {
+  position: absolute;
+  left: calc(50% + 50% * cos(var(--a)));
+  top: calc(50% + 50% * sin(var(--a)));
+  translate: -50% -50%;
+}
+.orbit-pill > span {
+  display: inline-block;
+  white-space: nowrap;
+  border-radius: 9999px;
+  border: 1px solid var(--hairline);
+  background: rgb(var(--surface-rgb));
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: orbit-spin var(--dur) linear infinite;
+  animation-direction: var(--dir-inv);
+}
+.orbit-pill:nth-child(4n) > span {
+  background: rgb(var(--primary-rgb) / 0.18);
+  border-color: rgb(var(--primary-rgb) / 0.4);
+}
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (hover: hover) {
+  .orbit:hover .orbit-ring,
+  .orbit:hover .orbit-pill > span {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring,
+  .orbit-pill > span {
+    animation: none;
+  }
+}
+
+/* ---------- Editorial: contact status ---------- */
+.status-in {
+  animation: status-in 200ms var(--ease-out);
+}
+@keyframes status-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Safety net: nothing may widen the page. `clip` (unlike `hidden`) keeps position: sticky working. */
+#site-content {
+  overflow-x: clip;
+}
+
+/* ---------- Editorial: cursor-following glow (see PointerEffects) ---------- */
+.glow-card {
+  position: relative;
+}
+.glow-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(var(--primary-rgb) / 0.16),
+    transparent 70%
+  );
+  transition: opacity 300ms var(--ease-out);
+}
+@media (hover: hover) {
+  .glow-card:hover::before {
+    opacity: 1;
+  }
+}
+/* Variant for flat rows (no card edge): the glow extends past the row box and fades out
+   through several stops, so it dissolves into the page instead of ending at a hard edge. */
+.glow-card.glow-bleed::before {
+  inset: -300px;
+  border-radius: 0;
+  background: radial-gradient(
+    360px circle at calc(var(--mx, 0px) + 300px) calc(var(--my, 0px) + 300px),
+    rgb(var(--primary-rgb) / 0.14) 0%,
+    rgb(var(--primary-rgb) / 0.09) 25%,
+    rgb(var(--primary-rgb) / 0.045) 50%,
+    rgb(var(--primary-rgb) / 0.015) 75%,
+    transparent 100%
+  );
+}
+
+/* ---------- Editorial: top bar (transparent over the hero, solid once scrolled) ---------- */
+.topbar {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 300ms var(--ease-out),
+    border-color 300ms var(--ease-out);
+}
+.topbar[data-scrolled] {
+  background: rgb(var(--bg-rgb) / 0.9);
+  border-bottom-color: var(--hairline);
+}
+@media (prefers-reduced-motion: reduce) {
+  .topbar {
+    transition: none;
+  }
+}
+
+/* ---------- Editorial: gradient wipe on hovered menu text ---------- */
+/* A copy of the text, filled with the gradient, is revealed left-to-right with clip-path; plain
+   colour can't transition into a gradient, and clip-path stays on the compositor. */
+.grad-wipe {
+  position: relative;
+  display: inline-block;
+  transition: transform 500ms var(--ease-out);
+}
+.grad-wipe::after {
+  content: attr(data-text);
+  content: attr(data-text) / '';
+  position: absolute;
+  inset: 0;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 600ms cubic-bezier(0.65, 0, 0.35, 1);
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .menu-item:hover .grad-wipe::after {
+    clip-path: inset(0);
+  }
+  .menu-item:hover .grad-wipe {
+    transform: translateX(14px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .grad-wipe,
+  .grad-wipe::after {
+    transition: none;
+  }
+}
+
+/* ---------- Editorial: availability dot ("breathing" green light) ---------- */
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #3ee08f;
+  box-shadow: 0 0 12px #3ee08f;
+  animation: breathe 2s ease-in-out infinite;
+}
+@keyframes breathe {
+  50% {
+    opacity: 0.35;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-dot {
+    animation: none;
   }
 }

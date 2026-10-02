@@ -45,9 +45,21 @@ describe('ProjectCard', () => {
     const link = screen.getByRole('link', { name: /live/i })
     expect(link).toHaveAttribute('href', 'https://side.vercel.app')
   })
-  it('has no 3D tilt style', () => {
+  it('lets the custom cursor grow over the project links', () => {
+    render(<ProjectCard project={sideProject} />)
+    expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute('data-cursor')
+    expect(screen.getByRole('link', { name: /live/i })).toHaveAttribute('data-cursor')
+  })
+  it('is an article with no inline style', () => {
     const { container } = render(<ProjectCard project={workProject} />)
-    const card = container.firstChild as HTMLElement
-    expect(card.style.transformStyle).toBe('')
+    expect((container.firstChild as HTMLElement).tagName).toBe('ARTICLE')
+    expect(container.querySelector('[style]')).toBeNull()
+  })
+
+  it('has a cursor-following glow and magnetic link buttons', () => {
+    const { container } = render(<ProjectCard project={sideProject} />)
+    expect(container.firstChild).toHaveAttribute('data-glow')
+    expect(screen.getByRole('link', { name: /github/i }).closest('[data-magnetic]')).not.toBeNull()
+    expect(screen.getByRole('link', { name: /live/i }).closest('[data-magnetic]')).not.toBeNull()
   })
 })

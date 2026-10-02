@@ -9,7 +9,7 @@ export const experiences: Experience[] = [
     location: 'Jakarta · Hybrid',
     current: true,
     highlights: [
-      'Own backend services and REST APIs for MyTelkomsel',
+      'Own backend services and REST APIs for MyTelkomsel in the Transaction & Payment (TRPY) domain',
       'Scope, design, implement, and provide production support',
       'Strengthen reliability through robust validation and error handling',
       'Enforce consistent coding standards across the team',

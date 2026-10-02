@@ -2,33 +2,33 @@ import type { Achievement } from '@/types'
 
 export const achievements: Achievement[] = [
   {
-    value: 4,
-    suffix: '+',
-    label: 'Years of Experience',
-    description: 'From IT support to backend engineering',
-  },
-  {
     value: 20,
     suffix: '%',
     label: 'Performance Improvement',
-    description: 'Via ORM profiling and query optimization',
+    description: 'Faster data processing via ORM profiling and query optimization',
   },
   {
     value: 2,
     suffix: '',
     label: 'Zero-Defect Sprints',
-    description: 'Consecutive sprints with 0 backend defects',
+    description: 'Consecutive sprints delivered with 0 backend defects',
   },
   {
-    value: 2,
+    value: 1,
     suffix: '',
-    label: 'Companies',
-    description: 'Delivering scalable backend products',
+    label: 'Critical Domain Owned',
+    description: 'Transaction & Payment (TRPY) APIs behind MyTelkomsel',
   },
   {
-    value: 10,
+    value: 4,
     suffix: '',
-    label: 'Side Projects',
-    description: 'Built and shipped outside full-time work',
+    label: 'Channels, One Platform',
+    description: 'Asterisk PBX, WhatsApp Business API and more, unified into a single platform',
+  },
+  {
+    value: 4,
+    suffix: '+',
+    label: 'Years of Experience',
+    description: 'From IT support to backend engineering on a telco super app',
   },
 ]
