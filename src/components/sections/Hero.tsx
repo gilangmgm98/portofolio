@@ -1,7 +1,7 @@
 'use client'
 
 import { m, useReducedMotion, useScroll, useTransform } from 'motion/react'
-import { EASE_OUT } from '@/lib/motion'
+import { transitionFor } from '@/lib/motion'
 import { scrollToSection } from '@/lib/scroll'
 
 const TAGS = { span: m.span, p: m.p, div: m.div } as const
@@ -14,15 +14,16 @@ function Line({ as = 'div', delay, reduce, className, children }: {
   children: React.ReactNode
 }) {
   const Tag = TAGS[as]
-  // "materialize": blur + rise, only when motion is allowed
-  const hidden = reduce ? { opacity: 0 } : { opacity: 0, transform: 'translateY(16px)', filter: 'blur(8px)' }
-  const shown = reduce ? { opacity: 1 } : { opacity: 1, transform: 'translateY(0px)', filter: 'blur(0px)' }
+  // "materialize": blur + rise. The states are the same for everyone (hydration-safe); under
+  // reduced motion transitionFor() makes blur/offset snap instantly and only fades opacity.
+  const hidden = { opacity: 0, transform: 'translateY(16px)', filter: 'blur(8px)' }
+  const shown = { opacity: 1, transform: 'translateY(0px)', filter: 'blur(0px)' }
   return (
     <Tag
       className={`block ${className ?? ''}`}
       initial={hidden}
       animate={shown}
-      transition={{ duration: reduce ? 0.2 : 0.6, ease: EASE_OUT, delay: reduce ? 0 : delay }}
+      transition={{ ...transitionFor(reduce), delay: reduce ? 0 : delay }}
     >
       {children}
     </Tag>

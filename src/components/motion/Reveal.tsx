@@ -11,7 +11,7 @@ interface RevealProps {
 
 export default function Reveal({ children, className, delay = 0 }: RevealProps) {
   const reduce = !!useReducedMotion()
-  const { hidden, shown } = revealStates(reduce)
+  const { hidden, shown } = revealStates()
   return (
     <m.div
       className={className}
