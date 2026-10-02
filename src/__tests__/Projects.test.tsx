@@ -1,13 +1,20 @@
 import { render, screen } from '@testing-library/react'
 import Projects from '@/components/sections/Projects'
+import { projects } from '@/data/projects'
 
 describe('Projects', () => {
-  it('renders section label', () => {
+  it('is the Projects region', () => {
     render(<Projects />)
-    expect(screen.getByText(/05 \/ Projects/i)).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Projects' })).toHaveAttribute('id', 'projects')
   })
-  it('renders MyTelkomsel Backend Services', () => {
+
+  it('renders the MyTelkomsel work project', () => {
     render(<Projects />)
     expect(screen.getByText('MyTelkomsel Backend Services')).toBeInTheDocument()
+  })
+
+  it('renders every project', () => {
+    render(<Projects />)
+    expect(screen.getAllByRole('article')).toHaveLength(projects.length)
   })
 })
