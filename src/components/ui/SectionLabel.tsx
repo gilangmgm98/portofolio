@@ -6,9 +6,9 @@ interface SectionLabelProps {
 export default function SectionLabel({ id, children }: SectionLabelProps) {
   return (
     <div data-reveal="fade" className="mb-10 flex items-center gap-4">
-      <span id={id} className="text-[12.5px] font-bold uppercase tracking-[0.16em] text-muted">
+      <h2 id={id} className="text-[12.5px] font-bold uppercase tracking-[0.16em] text-muted">
         {children}
-      </span>
+      </h2>
       <span aria-hidden="true" className="h-px flex-1 bg-hairline" />
     </div>
   )

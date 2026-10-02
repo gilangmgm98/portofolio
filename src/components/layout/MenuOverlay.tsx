@@ -38,6 +38,12 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
       if (items.length === 0) return
       const first = items[0]
       const last = items[items.length - 1]
+      // focus escaped (e.g. a click on the backdrop moved it to <body>): pull it back in
+      if (!root.contains(document.activeElement)) {
+        e.preventDefault()
+        first.focus()
+        return
+      }
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault()
         last.focus()
@@ -67,7 +73,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
       aria-hidden={!open}
       inert={!open}
       data-open={open ? 'true' : 'false'}
-      className="menu-overlay flex flex-col"
+      className="menu-overlay flex flex-col overflow-y-auto"
     >
       <div className="flex items-center justify-between px-6 py-5 md:px-14">
         <span className="font-display text-xl font-bold tracking-heading">
@@ -84,7 +90,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
               <ScrollLink
                 id={link.id}
                 onNavigate={onClose}
-                className="flex items-baseline gap-5 py-4 font-display text-[clamp(2.5rem,9vw,6rem)] font-bold leading-none tracking-display"
+                className="flex items-baseline gap-5 py-4 font-display text-[clamp(2.5rem,min(9vw,11svh),6rem)] font-bold leading-none tracking-display"
               >
                 <span aria-hidden="true" className="text-sm font-medium text-muted">
                   {String(i + 1).padStart(2, '0')}

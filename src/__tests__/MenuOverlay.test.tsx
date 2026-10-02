@@ -88,4 +88,22 @@ describe('MenuOverlay', () => {
     expect(onClose).toHaveBeenCalledTimes(1)
     await waitFor(() => expect(Element.prototype.scrollIntoView).toHaveBeenCalled())
   })
+
+  it('scrolls internally and scales its links to the viewport height (short screens must not clip it)', () => {
+    setup()
+    expect(screen.getByRole('dialog', { name: 'Site menu' })).toHaveClass('overflow-y-auto')
+    expect(screen.getByRole('link', { name: 'Projects' }).className).toContain('11svh')
+  })
+
+  it('pulls focus back into the dialog when it has escaped (e.g. after clicking the backdrop)', async () => {
+    const user = userEvent.setup()
+    setup()
+    // something tabbable outside the dialog (the real page has the top bar and the skip link there)
+    document.body.insertAdjacentHTML('afterbegin', '<a href="#outside" id="outside">outside</a>')
+    ;(document.activeElement as HTMLElement).blur()
+    expect(document.body).toBe(document.activeElement)
+    await user.tab()
+    expect(document.activeElement).not.toBe(document.getElementById('outside'))
+    expect(screen.getByRole('dialog', { name: 'Site menu' })).toContainElement(document.activeElement as HTMLElement)
+  })
 })

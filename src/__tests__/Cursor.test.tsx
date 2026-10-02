@@ -42,4 +42,9 @@ describe('Cursor', () => {
     expect(ring).toHaveAttribute('data-hover', 'false')
     button.remove()
   })
+
+  it('scales an inner shape, not the GSAP-positioned ring (GSAP writes inline scale: none)', () => {
+    const { container } = render(<Cursor />)
+    expect(container.querySelector('.cursor-ring > .cursor-ring-shape')).toBeInTheDocument()
+  })
 })

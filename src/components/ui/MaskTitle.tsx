@@ -21,22 +21,29 @@ export default function MaskTitle({ as: Tag = 'h2', trigger = 'scroll', classNam
       const el = ref.current
       if (!el) return
       el.setAttribute('data-ready', '')
-      const split = SplitText.create(el, {
-        type: 'lines',
-        mask: 'lines',
-        autoSplit: true,
-        onSplit: (self) => {
-          gsap.set(el, { opacity: 1 })
-          return gsap.from(self.lines, {
-            yPercent: 110,
-            duration: 1.1,
-            ease: 'expo.out',
-            stagger: 0.08,
-            delay: trigger === 'load' ? 0.15 : 0,
-            scrollTrigger: trigger === 'scroll' ? { trigger: el, start: 'top 88%', once: true } : undefined,
-          })
-        },
-      })
+      let split: ReturnType<typeof SplitText.create>
+      try {
+        split = SplitText.create(el, {
+          type: 'lines',
+          mask: 'lines',
+          autoSplit: true,
+          onSplit: (self) => {
+            gsap.set(el, { opacity: 1 })
+            return gsap.from(self.lines, {
+              yPercent: 110,
+              duration: 1.1,
+              ease: 'expo.out',
+              stagger: 0.08,
+              delay: trigger === 'load' ? 0.15 : 0,
+              scrollTrigger: trigger === 'scroll' ? { trigger: el, start: 'top 88%', once: true } : undefined,
+            })
+          },
+        })
+      } catch {
+        // could not take over: give the title back to the CSS failsafe instead of leaving it hidden
+        el.removeAttribute('data-ready')
+        return
+      }
       return () => split.revert()
     })
   }, [trigger])

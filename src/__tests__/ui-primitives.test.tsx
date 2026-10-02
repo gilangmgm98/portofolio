@@ -18,6 +18,7 @@ describe('Section', () => {
     expect(region).toHaveAttribute('id', 'about')
     expect(region).toHaveAttribute('data-section')
     expect(screen.getByText('body')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'About' })).toHaveAttribute('id', 'about-label')
     const label = screen.getByText('About').parentElement as HTMLElement
     expect(label).toHaveAttribute('data-reveal', 'fade')
     expect(label).not.toHaveAttribute('style')

@@ -31,4 +31,12 @@ describe('globals.css', () => {
   it('clips horizontal overflow of the page content without creating a scroll container', () => {
     expect(css).toMatch(/#site-content\s*\{[^}]*overflow-x:\s*clip/)
   })
+  it('grows the cursor via the inner shape (inline GSAP transforms would override scale on the ring)', () => {
+    expect(css).toMatch(/\.cursor-ring\[data-hover='true'\] \.cursor-ring-shape\s*\{[^}]*scale:\s*1\.8/)
+    expect(css).not.toMatch(/\.cursor-ring\[data-hover='true'\]\s*\{[^}]*scale:/)
+  })
+  it('gives translucent impact-card gradients an opaque base so stacked cards never ghost through', () => {
+    expect(css).toMatch(/\.impact-card\[data-tone='0'\]\s*\{[^}]*\),\s*rgb\(var\(--surface-rgb\)\);/)
+    expect(css).toMatch(/\.impact-card\[data-tone='1'\]\s*\{[^}]*\),\s*rgb\(var\(--surface-rgb\)\);/)
+  })
 })

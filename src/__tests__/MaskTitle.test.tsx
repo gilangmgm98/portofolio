@@ -57,4 +57,14 @@ describe('MaskTitle', () => {
     const [, vars] = (gsapMock.from as jest.Mock).mock.calls[0]
     expect(vars.scrollTrigger).toMatchObject({ start: 'top 88%', once: true })
   })
+
+  it('stays visible if SplitText throws (a failed hand-over must not leave the title hidden)', () => {
+    render(<MaskTitle>Title</MaskTitle>)
+    ;(SplitTextMock.create as jest.Mock).mockImplementationOnce(() => {
+      throw new Error('split failed')
+    })
+    expect(() => matchMediaCalls.find((c) => c.query === MOTION_OK)!.fn()).not.toThrow()
+    // data-ready cancels the CSS failsafe, so it must not stay set when we could not take over
+    expect(screen.getByRole('heading')).not.toHaveAttribute('data-ready')
+  })
 })

@@ -64,4 +64,11 @@ describe('achievements data', () => {
       expect(a.suffix).toBeDefined()
     })
   })
+
+  it('describes the current portfolio stack truthfully (no Three.js / snap scroll / Dark Cosmos)', () => {
+    const me = projects.find((p) => p.type === 'side' && p.isCurrentSite)!
+    expect(me.description).not.toMatch(/three\.js|snap|dark cosmos|particle/i)
+    expect(me.tags).not.toContain('Three.js')
+    expect(me.tags).toEqual(expect.arrayContaining(['GSAP']))
+  })
 })
