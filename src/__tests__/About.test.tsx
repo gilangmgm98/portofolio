@@ -2,28 +2,36 @@ import { render, screen } from '@testing-library/react'
 import About from '@/components/sections/About'
 
 describe('About', () => {
-  it('renders section heading', () => {
+  it('is the About region', () => {
     render(<About />)
-    expect(screen.getByText('Who I Am')).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'About' })).toHaveAttribute('id', 'about')
   })
-  it('renders bio text mentioning backend developer', () => {
+
+  it('keeps the existing bio', () => {
     render(<About />)
     expect(screen.getByText(/backend developer/i)).toBeInTheDocument()
+    expect(screen.getByText('4+ years')).toBeInTheDocument()
+    expect(screen.getByText(/MyTelkomsel/)).toBeInTheDocument()
   })
-  it('renders LinkedIn link', () => {
+
+  it('shows the portrait', () => {
     render(<About />)
-    const link = screen.getByRole('link', { name: /linkedin/i })
-    expect(link).toHaveAttribute('href', 'https://www.linkedin.com/in/gilangmgm/')
+    expect(screen.getByRole('img', { name: 'Muhammad Gilang Murdiyanto' })).toBeInTheDocument()
   })
-  it('renders GitHub link', () => {
+
+  it('has the info grid: location, contact links and current role', () => {
     render(<About />)
-    const link = screen.getByRole('link', { name: /github/i })
-    expect(link).toHaveAttribute('href', 'https://github.com/gilangmgm98')
+    expect(screen.getByText('Location')).toBeInTheDocument()
+    expect(screen.getByText('Jakarta, Indonesia')).toBeInTheDocument()
+    expect(screen.getByText('Currently')).toBeInTheDocument()
+    expect(screen.getByText('Back End Developer at CODE.ID')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'gilangmgm98@gmail.com' })).toHaveAttribute('href', 'mailto:gilangmgm98@gmail.com')
+    expect(screen.getByRole('link', { name: /linkedin/i })).toHaveAttribute('href', 'https://www.linkedin.com/in/gilangmgm/')
+    expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute('href', 'https://github.com/gilangmgm98')
   })
+
   it('never uses a fixed screen height (tall content must not clip)', () => {
     const { container } = render(<About />)
-    const section = container.querySelector('section')!
-    expect(section).toHaveClass('portfolio-section', 'min-h-screen')
-    expect(section.className).not.toMatch(/(^|\s)(md:)?h-screen/)
+    expect((container.firstChild as HTMLElement).className).not.toMatch(/(^|\s)(md:)?h-screen/)
   })
 })
