@@ -1,24 +1,22 @@
-'use client'
-
-import { useRef } from 'react'
 import { achievements } from '@/data/achievements'
 import AchievementStat from '@/components/ui/AchievementStat'
+import SectionHeading from '@/components/ui/SectionHeading'
+import { RevealGroup, RevealItem } from '@/components/motion/Reveal'
 
 export default function Achievements() {
-  const sectionRef = useRef<HTMLElement>(null)
-
   return (
-    <section ref={sectionRef} className="portfolio-section w-full min-h-screen md:h-screen flex flex-col items-center justify-center bg-cosmos-bg px-6 md:px-16 py-20 md:py-0">
-      <div className="max-w-5xl w-full">
-        <div className="mb-16 text-center">
-          <p className="text-cosmos-primary text-xs tracking-[0.4em] uppercase font-mono mb-2">06 / Achievements</p>
-          <h2 className="text-4xl md:text-5xl font-black text-cosmos-text">By The Numbers</h2>
+    <section className="portfolio-section flex min-h-screen w-full flex-col items-center justify-center px-6 py-24 md:px-16">
+      <div className="w-full max-w-5xl">
+        <div className="mb-16">
+          <SectionHeading label="06 / Achievements" title="By The Numbers" align="center" />
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
+        <RevealGroup className="grid grid-cols-2 gap-8 md:grid-cols-5">
           {achievements.map((a) => (
-            <AchievementStat key={a.label} {...a} triggerRef={sectionRef} />
+            <RevealItem key={a.label}>
+              <AchievementStat {...a} />
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   )

@@ -1,23 +1,17 @@
 import { render, screen } from '@testing-library/react'
-import { useRef } from 'react'
 import AchievementStat from '@/components/ui/AchievementStat'
-
-function Wrapper() {
-  const ref = useRef<HTMLElement>(null)
-  return (
-    <section ref={ref}>
-      <AchievementStat value={3} suffix="+" label="Years of Experience" triggerRef={ref} />
-    </section>
-  )
-}
 
 describe('AchievementStat', () => {
   it('renders label', () => {
-    render(<Wrapper />)
+    render(<AchievementStat value={3} suffix="+" label="Years of Experience" />)
     expect(screen.getByText('Years of Experience')).toBeInTheDocument()
   })
   it('renders suffix', () => {
-    render(<Wrapper />)
+    render(<AchievementStat value={3} suffix="+" label="Years of Experience" />)
     expect(screen.getByText('+')).toBeInTheDocument()
+  })
+  it('exposes the final value to assistive tech from the start', () => {
+    render(<AchievementStat value={20} suffix="%" label="Performance Improvement" />)
+    expect(screen.getByLabelText('20%')).toBeInTheDocument()
   })
 })
