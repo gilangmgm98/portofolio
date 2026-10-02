@@ -439,6 +439,20 @@ html[data-menu-open] {
     opacity: 1;
   }
 }
+/* Variant for flat rows (no card edge): the glow extends past the row box and fades out
+   through several stops, so it dissolves into the page instead of ending at a hard edge. */
+.glow-card.glow-bleed::before {
+  inset: -300px;
+  border-radius: 0;
+  background: radial-gradient(
+    360px circle at calc(var(--mx, 0px) + 300px) calc(var(--my, 0px) + 300px),
+    rgb(var(--primary-rgb) / 0.14) 0%,
+    rgb(var(--primary-rgb) / 0.09) 25%,
+    rgb(var(--primary-rgb) / 0.045) 50%,
+    rgb(var(--primary-rgb) / 0.015) 75%,
+    transparent 100%
+  );
+}
 
 /* ---------- Editorial: top bar (transparent over the hero, solid once scrolled) ---------- */
 .topbar {

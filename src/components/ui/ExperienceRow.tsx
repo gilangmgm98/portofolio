@@ -5,7 +5,7 @@ export default function ExperienceRow({ experience }: { experience: Experience }
     <article
       data-reveal
       data-glow
-      className="glow-card grid gap-4 border-t border-hairline py-8 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-10"
+      className="glow-card glow-bleed grid gap-4 border-t border-hairline py-8 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-10"
     >
       <div className="text-sm text-muted">
         <p>{experience.period}</p>

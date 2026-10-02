@@ -51,4 +51,9 @@ describe('ExperienceRow', () => {
     const { container } = render(<ExperienceRow experience={experience} />)
     expect(container.firstChild).toHaveAttribute('data-glow')
   })
+
+  it('lets the glow bleed past the row box so it blends into the page instead of ending at a hard edge', () => {
+    const { container } = render(<ExperienceRow experience={experience} />)
+    expect(container.firstChild).toHaveClass('glow-bleed')
+  })
 })

@@ -55,4 +55,11 @@ describe('globals.css', () => {
   it('has an opaque scrim layer for the stacked impact cards', () => {
     expect(css).toMatch(/\.impact-scrim\s*\{[^}]*background:\s*rgb\(var\(--bg-rgb\)\)[^}]*opacity:\s*0/)
   })
+  it('has a bleeding glow variant: pseudo extends past the box, soft multi-stop falloff, no clipping radius', () => {
+    const block = css.match(/\.glow-card\.glow-bleed::before\s*\{([^}]*)\}/)
+    expect(block).not.toBeNull()
+    expect(block![1]).toMatch(/inset:\s*-\d+px/)
+    expect(block![1]).toMatch(/radial-gradient/)
+    expect((block![1].match(/rgb\(var\(--primary-rgb\)/g) ?? []).length).toBeGreaterThanOrEqual(4)
+  })
 })
