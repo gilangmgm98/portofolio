@@ -3,17 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --bg-rgb: 0 0 0;
-  --surface-rgb: 28 28 30;
-  --text-rgb: 245 245 247;
-  --muted-rgb: 134 134 139;
+  --bg-rgb: 7 7 11;
+  --surface-rgb: 22 22 30;
+  --text-rgb: 236 235 243;
+  --muted-rgb: 141 139 156;
   --primary-rgb: 167 139 250;
+  --coral-rgb: 255 138 107;
   --on-primary: #0a0a0f;
+  --on-grad: #0a0a0f;
   --border: rgba(255, 255, 255, 0.1);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --grad: linear-gradient(100deg, #a78bfa 0%, #ff8a6b 100%);
+  --radius-card: 28px;
   --glass: rgba(28, 28, 30, 0.6);
   --glass-blur: blur(20px) saturate(180%);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --font-display: -apple-system, 'SF Pro Display', var(--font-geist-sans), system-ui, sans-serif;
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -26,6 +30,7 @@
 @media (prefers-contrast: more) {
   :root {
     --border: rgba(255, 255, 255, 0.4);
+    --hairline: rgba(255, 255, 255, 0.4);
     --muted-rgb: 174 174 178;
   }
 }
@@ -111,5 +116,80 @@ body {
     background:
       radial-gradient(60% 50% at 50% 0%, rgb(var(--primary-rgb) / 0.14), transparent 70%),
       radial-gradient(40% 40% at 90% 90%, rgb(var(--primary-rgb) / 0.08), transparent 70%);
+  }
+}
+
+/* ---------- Editorial: reveal gating (markup is identical for everyone) ---------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: reveal-failsafe 0s linear 3s forwards;
+}
+.js [data-reveal='fade'],
+.js [data-reveal='mask'] {
+  transform: none;
+}
+/* GSAP marks every reveal element data-ready when it takes over; that cancels the failsafe */
+.js [data-reveal][data-ready] {
+  animation: none;
+}
+@keyframes reveal-failsafe {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+@layer components {
+  .text-grad {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .btn-grad,
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    transition:
+      transform 120ms var(--ease-out),
+      background-color 150ms var(--ease-out),
+      border-color 150ms var(--ease-out);
+  }
+  .btn-grad {
+    background: var(--grad);
+    color: var(--on-grad);
+  }
+  .btn-ghost {
+    border: 1px solid var(--hairline);
+    color: rgb(var(--text-rgb));
+  }
+  .btn-grad:active,
+  .btn-ghost:active {
+    transform: scale(0.97);
+  }
+  @media (hover: hover) {
+    .btn-ghost:hover {
+      border-color: rgb(var(--text-rgb) / 0.5);
+    }
+  }
+  .grad-border {
+    border: 1.5px solid transparent;
+    background:
+      linear-gradient(rgb(var(--bg-rgb)), rgb(var(--bg-rgb))) padding-box,
+      var(--grad) border-box;
   }
 }
