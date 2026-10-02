@@ -1,46 +1,35 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { gsap } from '@/lib/gsap'
+import { useRef } from 'react'
+import { m, useReducedMotion, useScroll } from 'motion/react'
 import { experiences } from '@/data/experience'
 import TimelineItem from '@/components/ui/TimelineItem'
+import SectionHeading from '@/components/ui/SectionHeading'
+import Reveal from '@/components/motion/Reveal'
 
 export default function Experience() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const lineRef = useRef<HTMLDivElement>(null)
-  const itemsRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(lineRef.current, {
-        scaleY: 0, transformOrigin: 'top center', duration: 1.5, ease: 'power2.inOut',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
-      })
-      const cards = itemsRef.current?.querySelectorAll('.timeline-card')
-      if (cards) {
-        gsap.from(cards, {
-          opacity: 0, y: 40, duration: 0.8, stagger: 0.2, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' },
-        })
-      }
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
+  const listRef = useRef<HTMLDivElement>(null)
+  const reduce = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 80%', 'end 60%'] })
 
   return (
-    <section ref={sectionRef} className="portfolio-section w-full min-h-screen flex flex-col items-center justify-center bg-cosmos-bg px-6 md:px-16 py-16">
-      <div className="max-w-5xl w-full">
-        <div className="mb-10">
-          <p className="text-cosmos-primary text-xs tracking-[0.4em] uppercase font-mono mb-2">04 / Experience</p>
-          <h2 className="text-4xl md:text-5xl font-black text-cosmos-text">Work History</h2>
+    <section className="portfolio-section flex min-h-screen w-full flex-col items-center justify-center px-6 py-24 md:px-16">
+      <div className="w-full max-w-5xl">
+        <div className="mb-12">
+          <SectionHeading label="04 / Experience" title="Work History" />
         </div>
-        <div className="relative">
-          <div ref={lineRef} className="hidden md:block absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-cosmos-primary via-cosmos-accent to-transparent" style={{ height: '100%', top: 0 }} />
-          <div ref={itemsRef} className="flex flex-col gap-8">
+        <div ref={listRef} className="relative">
+          {/* scroll-linked 1:1 (no time-based animation); full line when reduced motion */}
+          <m.div
+            aria-hidden="true"
+            className="absolute left-[calc(50%-0.5px)] top-0 hidden h-full w-px bg-cosmos-primary/50 md:block"
+            style={{ scaleY: reduce ? 1 : scrollYProgress, originY: 0 }}
+          />
+          <div className="flex flex-col gap-8">
             {experiences.map((exp, i) => (
-              <div key={`${exp.company}-${exp.period}`} className="timeline-card">
+              <Reveal key={`${exp.company}-${exp.period}`}>
                 <TimelineItem experience={exp} position={i % 2 === 0 ? 'right' : 'left'} />
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

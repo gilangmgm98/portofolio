@@ -15,4 +15,8 @@ describe('Experience', () => {
     const entries = screen.getAllByText('eCentrix Solutions')
     expect(entries.length).toBeGreaterThanOrEqual(1)
   })
+  it('renders every experience entry (content never gated on scroll)', () => {
+    render(<Experience />)
+    expect(screen.getAllByText(/Developer|Support/).length).toBeGreaterThanOrEqual(3)
+  })
 })
