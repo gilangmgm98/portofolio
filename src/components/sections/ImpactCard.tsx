@@ -18,7 +18,7 @@ export default function ImpactCard({ stat, index, total }: ImpactCardProps) {
     >
       <div className="flex items-center justify-between text-[12.5px] font-bold uppercase tracking-[0.16em] text-muted">
         <span>{stat.label}</span>
-        <span>
+        <span className="whitespace-nowrap">
           {pad(index + 1)} / {pad(total)}
         </span>
       </div>

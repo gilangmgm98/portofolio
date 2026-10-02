@@ -41,4 +41,10 @@ describe('Orbit', () => {
     expect(angles[0]).toBe(0)
     if (angles.length > 1) expect(angles[1]).toBeCloseTo(360 / angles.length)
   })
+
+  it('is hidden on narrow screens: ring pills overhang their circle and would widen the page', () => {
+    const { container } = render(<Orbit skills={skills} />)
+    const orbit = container.firstChild as HTMLElement
+    expect(orbit).toHaveClass('hidden', 'sm:block')
+  })
 })

@@ -28,4 +28,7 @@ describe('globals.css', () => {
   it('strengthens borders under prefers-contrast: more', () => {
     expect(css).toMatch(/@media \(prefers-contrast: more\)[\s\S]*--hairline:\s*rgba\(255, 255, 255, 0\.4\)/)
   })
+  it('clips horizontal overflow of the page content without creating a scroll container', () => {
+    expect(css).toMatch(/#site-content\s*\{[^}]*overflow-x:\s*clip/)
+  })
 })

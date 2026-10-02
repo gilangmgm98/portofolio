@@ -14,15 +14,6 @@ const config: Config = {
         coral: 'rgb(var(--coral-rgb) / <alpha-value>)',
         panel: 'rgb(var(--surface-rgb) / <alpha-value>)',
         hairline: 'var(--hairline)', // fixed alpha: no /opacity modifiers
-        // legacy aliases — removed in Task 14
-        cosmos: {
-          bg: 'rgb(var(--bg-rgb) / <alpha-value>)',
-          surface: 'rgb(var(--surface-rgb) / <alpha-value>)',
-          primary: 'rgb(var(--primary-rgb) / <alpha-value>)',
-          text: 'rgb(var(--text-rgb) / <alpha-value>)',
-          muted: 'rgb(var(--muted-rgb) / <alpha-value>)',
-          border: 'var(--border)',
-        },
       },
       fontFamily: {
         sans: ['var(--font-manrope)', 'system-ui', 'sans-serif'],

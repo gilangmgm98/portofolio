@@ -13,6 +13,8 @@ describe('Hero', () => {
     const h1 = screen.getByRole('heading', { level: 1 })
     expect(h1).toHaveTextContent('I build backends millions of people rely on.')
     expect(screen.getByText('millions of people')).toHaveClass('text-grad', 'italic')
+    // balanced lines: no orphaned last word ("on.") when the accent words are set larger
+    expect(h1).toHaveClass('text-balance')
   })
 
   it('renders the name row, role and intro', () => {

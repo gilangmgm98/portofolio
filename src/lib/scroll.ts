@@ -1,12 +1,5 @@
 import type Lenis from 'lenis'
 
-// Legacy (index-based) helper — removed in Task 14 together with the old components.
-export function scrollToSection(index: number) {
-  const sections = document.querySelectorAll('.portfolio-section')
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  sections[index]?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' })
-}
-
 let lenis: Lenis | null = null
 
 export function setLenis(instance: Lenis | null) {

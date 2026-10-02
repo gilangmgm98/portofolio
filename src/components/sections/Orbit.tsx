@@ -9,10 +9,12 @@ const RINGS = [
 ]
 
 // Decorative only (aria-hidden): the same skills are listed accessibly in the grouped lists.
+// Hidden below `sm`: ring pills are centred on the ring edge, so they overhang the circle by half a
+// pill and would widen the page on narrow screens (and 25+ pills are too crowded there anyway).
 export default function Orbit({ skills }: { skills: Skill[] }) {
   const rings = distributeRings(skills, RINGS.length)
   return (
-    <div data-reveal aria-hidden="true" className="orbit relative mx-auto aspect-square w-full max-w-[34rem]">
+    <div data-reveal aria-hidden="true" className="orbit relative mx-auto hidden aspect-square w-full max-w-[34rem] sm:block">
       <div className="orbit-core" />
       {rings.map((ring, r) => (
         <div

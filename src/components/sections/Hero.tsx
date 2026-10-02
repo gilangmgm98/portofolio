@@ -23,7 +23,7 @@ export default function Hero() {
       <MaskTitle
         as="h1"
         trigger="load"
-        className="my-10 font-display text-[clamp(3rem,9.2vw,8.25rem)] font-bold leading-display tracking-display text-ink"
+        className="my-10 text-balance font-display text-[clamp(3rem,9.2vw,8.25rem)] font-bold leading-display tracking-display text-ink"
       >
         I build backends <GradientText>millions of people</GradientText> rely on.
       </MaskTitle>

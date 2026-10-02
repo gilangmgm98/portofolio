@@ -7,7 +7,7 @@ import ScrollLink from '@/components/ui/ScrollLink'
 describe('GradientText', () => {
   it('renders an italic accent-font gradient span', () => {
     render(<GradientText>millions</GradientText>)
-    expect(screen.getByText('millions')).toHaveClass('font-accent', 'italic', 'text-grad')
+    expect(screen.getByText('millions')).toHaveClass('font-accent', 'italic', 'text-grad', 'text-[1.1em]', 'tracking-[-0.02em]', 'sm:whitespace-nowrap')
   })
 })
 

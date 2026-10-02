@@ -15,7 +15,7 @@ export default function Contact() {
       </p>
       <MaskTitle
         as="h2"
-        className="my-8 font-display text-[clamp(4rem,15vw,14rem)] font-extrabold leading-[0.9] tracking-display text-ink"
+        className="my-8 font-display text-[clamp(3rem,12.5vw,12rem)] font-extrabold leading-[0.9] tracking-display text-ink"
       >
         Let&apos;s talk
       </MaskTitle>

@@ -36,4 +36,9 @@ describe('ImpactCard', () => {
     expect(card.style.top).toContain('32px')
     expect(card).toHaveClass('lg:sticky')
   })
+
+  it('keeps the position marker on one line even when the label wraps', () => {
+    render(<ImpactCard stat={percent} index={1} total={5} />)
+    expect(screen.getByText('02 / 05')).toHaveClass('whitespace-nowrap')
+  })
 })
